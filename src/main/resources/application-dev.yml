@@ -1,0 +1,19 @@
+logging:
+  level:
+    ROOT: DEBUG
+    ru.andnovikov.ijustwannarun: DEBUG
+
+spring:
+  profiles:
+    active: dev
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: ijustwannarun
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080

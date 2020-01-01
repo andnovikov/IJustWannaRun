@@ -1,13 +1,13 @@
-package ru.ijustwannarun.ijustwannarun;
+package ru.andnovikov.ijustwannarun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IjustwannarunApplication {
+public class IJustWannaRunApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IjustwannarunApplication.class, args);
+		SpringApplication.run(IJustWannaRunApplication.class, args);
 	}
 
 }
