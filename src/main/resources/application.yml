@@ -5,5 +5,14 @@ logging:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017
-      database: ijustwannarun
+      #host: localhost
+      #port: 27017
+      #database: ijustwannarun
+      #username: test
+      #password: 7gH1ffqpDte9RsXz
+      #uri: mongodb+srv://test:7gH1ffqpDte9RsXz@cluster0-9lq0i.mongodb.net/test?retryWrites=true&w=majority
+      #auto-index-creation: false
+      uri: mongodb://ds163825.mlab.com:63825/heroku_88pd0w9v
+      database: heroku_88pd0w9v
+      username: user
+      password: sportnow256
