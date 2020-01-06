@@ -10,22 +10,12 @@ import java.util.Date;
 @Document(collection = "user_registration")
 public class UserRegistration {
 
-    @Id
-    private String id;
     @DBRef
     private Event event;
     @Field("reg_date")
     private Date regDate;
     @Field("reg_number")
     private Integer regNumber;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Event getEvent() {
         return event;

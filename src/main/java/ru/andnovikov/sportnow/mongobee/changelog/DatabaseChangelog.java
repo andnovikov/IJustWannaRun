@@ -85,14 +85,12 @@ public class DatabaseChangelog {
         userRegistration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
         userRegistration.setRegNumber(1);
         user.addRegistration(userRegistration);
-        mongoTemplate.save(userRegistration);
 
         userRegistration = new UserRegistration();
         userRegistration.setEvent(event2);
         userRegistration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
         userRegistration.setRegNumber(17);
         user.addRegistration(userRegistration);
-        mongoTemplate.save(userRegistration);
         mongoTemplate.save(user);
     }
 
