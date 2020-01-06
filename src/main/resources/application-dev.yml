@@ -3,9 +3,6 @@ logging:
     ru.andnovikov.ijustwannarun: DEBUG
 
 spring:
-  profiles:
-    active: dev
-
   data:
     mongodb:
       uri: mongodb://localhost:27017

@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import ru.andnovikov.sportnow.domain.Distance;
 import ru.andnovikov.sportnow.domain.Event;
 import ru.andnovikov.sportnow.domain.User;
-import ru.andnovikov.sportnow.domain.UserRegistration;
+import ru.andnovikov.sportnow.domain.Registration;
 import ru.andnovikov.sportnow.domain.enumeration.EventKind;
 import ru.andnovikov.sportnow.domain.enumeration.EventStatus;
 
@@ -21,7 +21,7 @@ public class DatabaseChangelog {
         User user = null;
         Event event, event1, event2 = null;
         Distance distance = null;
-        UserRegistration userRegistration = null;
+        Registration registration = null;
 
         user = new User();
         user.setLogin("test");
@@ -80,19 +80,19 @@ public class DatabaseChangelog {
         mongoTemplate.save(distance);
         mongoTemplate.save(event);
 
-        userRegistration = new UserRegistration();
-        userRegistration.setEvent(event1);
-        userRegistration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
-        userRegistration.setRegNumber(1);
-        user.addRegistration(userRegistration);
-        mongoTemplate.save(userRegistration);
+        registration = new Registration();
+        registration.setEvent(event1);
+        registration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
+        registration.setRegNumber(1);
+        user.addRegistration(registration);
+        mongoTemplate.save(registration);
 
-        userRegistration = new UserRegistration();
-        userRegistration.setEvent(event2);
-        userRegistration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
-        userRegistration.setRegNumber(17);
-        user.addRegistration(userRegistration);
-        mongoTemplate.save(userRegistration);
+        registration = new Registration();
+        registration.setEvent(event2);
+        registration.setRegDate(new SimpleDateFormat( "yyyyMMdd" ).parse( "20200101" ));
+        registration.setRegNumber(17);
+        user.addRegistration(registration);
+        mongoTemplate.save(registration);
         mongoTemplate.save(user);
     }
 

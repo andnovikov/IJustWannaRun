@@ -78,7 +78,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
 
-    private List<UserRegistration> registrations;
+    private List<Registration> registrations;
 
     public String getId() {
         return id;
@@ -193,15 +193,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.phone = phone;
     }
 
-    public List<UserRegistration> getRegistrations() {
+    public List<Registration> getRegistrations() {
         return registrations;
     }
 
-    public void setRegistrations(List<UserRegistration> registrations) {
-        this.registrations = registrations;
+    public void setRegistrations(List<Registration> Registrations) {
+        this.registrations = Registrations;
     }
 
-    public void addRegistration(UserRegistration registration) {
+    public void addRegistration(Registration registration) {
         if (registrations == null) {
             registrations = new ArrayList<>();
         }

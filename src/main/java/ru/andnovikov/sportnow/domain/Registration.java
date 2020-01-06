@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
-@Document(collection = "user_registration")
-public class UserRegistration {
+@Document(collection = "registrations")
+public class Registration {
 
     @Id
     private String id;
