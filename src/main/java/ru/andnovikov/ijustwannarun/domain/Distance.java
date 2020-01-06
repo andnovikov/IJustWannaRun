@@ -1,8 +1,12 @@
 package ru.andnovikov.ijustwannarun.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Document("distances")
 public class Distance {
 
@@ -11,9 +15,15 @@ public class Distance {
     // distance name
     private String name;
     // diastance length in km
-    private float length;
+    private double length;
     // participants limit
     private int limit;
+
+    public Distance (String name, double length, int limit) {
+        this.name = name;
+        this.length = length;
+        this.limit = limit;
+    }
 
     public String getId() {
         return id;
@@ -31,11 +41,11 @@ public class Distance {
         this.name = name;
     }
 
-    public float getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(float length) {
+    public void setLength(double length) {
         this.length = length;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import ru.andnovikov.ijustwannarun.domain.enumeration.EventKind;
 import ru.andnovikov.ijustwannarun.domain.enumeration.EventStatus;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,10 @@ public class Event {
     private String country;
     // city
     private String city;
+    // about
+    private String shortTitle;
+    // about
+    private String title;
     // available distances
     private List<Distance> distances;
 
@@ -123,6 +128,29 @@ public class Event {
 
     public void setDistances(List<Distance> distances) {
         this.distances = distances;
+    }
+
+    public String getShortTitle() {
+        return shortTitle;
+    }
+
+    public void setShortTitle(String shortTitle) {
+        this.shortTitle = shortTitle;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void addDistance(Distance distance) {
+        if (this.distances == null) {
+            this.distances = new ArrayList<>();
+        }
+        this.distances.add(distance);
     }
 
     @Override

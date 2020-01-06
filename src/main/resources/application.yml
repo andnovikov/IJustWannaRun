@@ -1,0 +1,9 @@
+logging:
+  level:
+    ru.andnovikov.ijustwannarun: DEBUG
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: ijustwannarun

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <h1>Забеги, велогонки и другие спортивные соревнования в Росии и мире</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Все</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Бег</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Плавание</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Велогонка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Лыжи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Триатлон</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <table align="centre" width="80%" class="events">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Лого</th>
+            <th>Название</th>
+            <th>Регистрация</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(function () {
+        $.get('/api/event').done(function (events) {
+            events.forEach(function (event) {
+                $('tbody').append(`
+                    <tr>
+                        <td>${event.date}</td>
+                        <td>${event.name}</td>
+                        <td><a href="/event/${event.id}">${event.name}</a></td>
+                        <td><a class="btn btn-outline-danger rounded-0" href="/event/${event.id}/reg" role="button">Регистрация</a></td>
+                    </tr>
+                `)
+            });
+        })
+    });
+</script>
+</body>
+</html>
