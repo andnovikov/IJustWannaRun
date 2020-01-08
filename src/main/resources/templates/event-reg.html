@@ -10,35 +10,35 @@
     <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-
 <div class="container">
-    <form action="#" th:action="@{/registration(event_id=${registration.event.id})}" th:object="${registration}" method="post">
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputFirstname">Имя</label>
-                <input type="firstname" class="form-control" id="inputFirstname" th:value="${user.firstName}">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <form action="#" th:action="@{/registration(event_id=${registration.event.id})}" th:object="${registration}" method="post">
+                        <div class="form-label-group">
+                            <label for="inputFirstname">Имя</label>
+                            <input type="firstname" class="form-control" id="inputFirstname" th:value="${user.firstName}">
+                        </div>
+                        <div class="form-label-group">
+                            <label for="inputLastname">Фамилия</label>
+                            <input type="lastname" class="form-control" id="inputLastname" th:value="${user.lastName}">
+                        </div>
+                        <div class="form-label-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" th:value="${user.email}">
+                        </div>
+                        <div class="form-label-group">
+                            <label for="inputPhone">Телефон</label>
+                            <input type="phone" class="form-control" id="inputPhone" placeholder="+79999999" th:value="${user.phone}">
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary ">Зарегистрироваться</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputLastname">Фамилия</label>
-                <input type="lastname" class="form-control" id="inputLastname" th:value="${user.lastName}">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" th:value="${user.email}">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputPhone">Телефон</label>
-                <input type="phone" class="form-control" id="inputPhone" placeholder="+79999999" th:value="${user.phone}">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary ">Зарегистрироваться</button>
-    </form>
+    </div>
 </div>
 </body>
 </html>

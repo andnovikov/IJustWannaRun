@@ -61,6 +61,7 @@ public class EventRegistrationController {
         user.addRegistration(registration);
         userService.save(user);
         return "redirect:/";
+        //TODO: open message with success registration ???
     }
 
 }
