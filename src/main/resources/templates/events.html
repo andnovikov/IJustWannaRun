@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<div>
+<div class="container">
     <h1>Забеги, велогонки и другие спортивные соревнования в Росии и мире</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -35,43 +35,8 @@
             </ul>
         </div>
     </nav>
-    <div class="col-md-12 container"></div>
-
+    <div class="col-md-12 container" id="container"></div>
 </div>
-<script>
-    $(function () {
-        $.get('/api/event').done(function (events) {
-            events.forEach(function (event) {
-                $('.container').append(`
-                    <div class="form-row">
-                        <div class="form-group col-md-1">
-                            <h1>26</h1>
-                            <h5>апреля</h5>
-                            <h5>2020</h5>
-                            <h5>БЕГ</h5>
-                            ${event.date}
-                        </div>
-                        <div class="form-group col-md-1"></div>
-                        <div class="form-group col-md-4">
-                            <div class="form-row">
-                                <h3><a href="/event/${event.id}">${event.name}</a></h3>
-                            </div>
-                            <div class="form-row">
-                                ${event.shortTitle}
-                            </div>
-                            <div class="form-row">Москва</div>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <a class="btn btn-outline-danger rounded-0" href="/event/${event.id}/reg" role="button">Регистрация</a>
-                            <div>Открыта до 26 марта</div>
-                            <div>Участие от 1000 руб</div>
-                        </div>
-                    </div>
-                    <hr>
-                `)
-            });
-        })
-    });
-</script>
+<script type="text/javascript" th:src="@{/js/events.js}"></script>
 </body>
 </html>
