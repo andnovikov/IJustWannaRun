@@ -5,12 +5,17 @@ $(function () {
 function getAll () {
     $.get('/api/event').done(function (events) {
         events.forEach(function (event) {
+            var date = new Date(event.date);
+            console.debug(date);
+            var dateNumber = date.getDate();
+            console.debug(dateNumber);
+            var dateYear = date.getFullYear();
             $("#container").append(`
                     <div class="form-row">
                         <div class="form-group col-md-1">
-                            <h1>26</h1>
+                            <h1>${dateNumber}</h1>
                             <h5>апреля</h5>
-                            <h5>2020</h5>
+                            <h5>${dateYear}</h5>
                             <h5>БЕГ</h5>
                             ${event.date}
                         </div>
