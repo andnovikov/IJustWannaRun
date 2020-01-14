@@ -8,10 +8,10 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ru.ijustwannarun</groupId>
-	<artifactId>ijustwannarun</artifactId>
+	<groupId>ru.sport-now</groupId>
+	<artifactId>sport-now</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ijustwannarun</name>
+	<name>sport-now</name>
 	<description>Project for searching and registration sport events.</description>
 
 	<properties>

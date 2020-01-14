@@ -1,6 +1,6 @@
 logging:
   level:
-    ru.andnovikov.ijustwannarun: DEBUG
+    ru.andnovikov.sportnow: DEBUG
 
 spring:
   data:
