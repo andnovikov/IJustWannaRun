@@ -1,7 +1,6 @@
 package ru.andnovikov.sportnow.rest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,11 +13,10 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class EventController {
-
-    private final Logger log = LogManager.getLogger(EventController.class);
 
     private static final String ENTITY_NAME = "event";
 

@@ -18,11 +18,11 @@
                     <form action="#" th:action="@{/registration(event_id=${registration.event.id})}" th:object="${registration}" method="post">
                         <div class="form-label-group">
                             <label for="inputFirstname">Имя</label>
-                            <input type="firstname" class="form-control" id="inputFirstname" th:value="${user.firstName}">
+                            <input type="text" class="form-control" id="inputFirstname" th:value="${user.firstName}">
                         </div>
                         <div class="form-label-group">
                             <label for="inputLastname">Фамилия</label>
-                            <input type="lastname" class="form-control" id="inputLastname" th:value="${user.lastName}">
+                            <input type="text" class="form-control" id="inputLastname" th:value="${user.lastName}">
                         </div>
                         <div class="form-label-group">
                             <label for="inputEmail">Email</label>
@@ -40,9 +40,5 @@
         </div>
     </div>
 </div>
-<script type = "text/javascript">
-    var dt = new Date("December 25, 1995 23:15:00");
-    document.write("getDay() : " + dt.getDay() );
-</script>
 </body>
 </html>

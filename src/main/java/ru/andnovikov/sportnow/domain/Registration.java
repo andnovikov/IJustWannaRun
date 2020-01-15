@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 
 import java.util.Date;
 
@@ -16,6 +17,8 @@ public class Registration {
     private Event event;
     @Field("reg_date")
     private Date regDate;
+    @Field("reg_status")
+    private RegStatus status;
     @Field("reg_number")
     private Integer regNumber;
 
@@ -49,5 +52,13 @@ public class Registration {
 
     public void setRegNumber(Integer regNumber) {
         this.regNumber = regNumber;
+    }
+
+    public RegStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RegStatus status) {
+        this.status = status;
     }
 }

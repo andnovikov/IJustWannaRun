@@ -7,8 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.andnovikov.sportnow.domain.Registration;
+import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 import ru.andnovikov.sportnow.repository.RegistrationRepository;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -17,10 +19,30 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final Logger log = LoggerFactory.getLogger(RegistrationServiceImpl.class);
 
     private final RegistrationRepository registrationRepository;
+    private final UserServiceImpl userServiceImpl;
+    private final EventService eventService;
 
     @Autowired
-    public RegistrationServiceImpl(RegistrationRepository registrationRepository) {
+    public RegistrationServiceImpl(RegistrationRepository registrationRepository, UserServiceImpl userServiceImpl, EventService eventService) {
         this.registrationRepository = registrationRepository;
+        this.userServiceImpl = userServiceImpl;
+        this.eventService = eventService;
+    }
+
+    /**
+     * Generate new Registration for userId and eventId
+     *
+     * @param userId for searching user
+     * @param eventId for searching event
+     * @return the persisted entity.
+     */
+    @Override
+    public Registration newRegistration(String userId, String eventId) {
+        Registration result = new Registration();
+        result.setEvent(eventService.findOne(eventId).orElseThrow(NoDataFoundException::new));
+        result.setRegDate(new Date());
+        result.setStatus(RegStatus.NEW);
+        return result;
     }
 
     /**

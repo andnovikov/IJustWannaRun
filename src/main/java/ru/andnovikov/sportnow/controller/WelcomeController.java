@@ -11,4 +11,9 @@ public class WelcomeController {
         return "events";
     }
 
+    @GetMapping("/event-show")
+    public String event(){
+        return "event";
+    }
+
 }

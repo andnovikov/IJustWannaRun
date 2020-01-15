@@ -18,6 +18,8 @@ public class Distance {
     private double length;
     // participants limit
     private int limit;
+    // price for registration
+    private int cost;
 
     public Distance (String name, double length, int limit) {
         this.name = name;

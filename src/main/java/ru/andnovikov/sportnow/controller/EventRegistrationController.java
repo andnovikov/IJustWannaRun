@@ -11,6 +11,7 @@ import ru.andnovikov.sportnow.rest.NoDataFoundException;
 import ru.andnovikov.sportnow.service.EventService;
 import ru.andnovikov.sportnow.service.RegistrationService;
 import ru.andnovikov.sportnow.service.UserService;
+import ru.andnovikov.sportnow.service.UserServiceImpl;
 
 import java.util.Date;
 import java.util.Optional;

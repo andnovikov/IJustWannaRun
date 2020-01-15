@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface RegistrationService {
 
+    Registration newRegistration(String userId, String eventId);
+
     Registration save(Registration registration);
 
     Page<Registration> findAll(Pageable pageable);
