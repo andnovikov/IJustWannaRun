@@ -1,0 +1,15 @@
+spring:
+  messages:
+    basename: i18n.messages
+
+  data:
+    mongodb:
+      database: sportnow
+
+  shell:
+    interactive:
+      enabled: false
+
+logging:
+  level:
+    ROOT: ERROR
