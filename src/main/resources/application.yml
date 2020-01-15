@@ -1,0 +1,13 @@
+logging:
+  level:
+    ru.andnovikov.sportnow: DEBUG
+
+spring:
+  data:
+    mongodb:
+      host: ds163825.mlab.com
+      database: heroku_88pd0w9v
+      username: user
+      password: sportnow256
+      #uri: mongodb://ds163825.mlab.com:63825/heroku_88pd0w9v
+      uri: mongodb://user:sportnow256@ds163825.mlab.com:63825/heroku_88pd0w9v?retryWrites=false

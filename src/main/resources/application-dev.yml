@@ -1,0 +1,15 @@
+logging:
+  level:
+    ru.andnovikov.sportnow: DEBUG
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: sportnow
+
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080

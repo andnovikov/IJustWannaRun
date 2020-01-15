@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Забеги, велогонки и другие спортивные соревнования в Росии и мире</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Все</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Бег</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Плавание</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Велогонка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Лыжи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Триатлон</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="col-md-12 container" id="container"></div>
+</div>
+<script type="text/javascript" th:src="@{/js/events.js}"></script>
+</body>
+</html>
