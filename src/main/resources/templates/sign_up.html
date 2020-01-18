@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/sign_up.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Регистрация</h2>
+    <form id="new_user" action="/" accept-charset="UTF-8" method="post">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_email">Email</label>
+                    <div class="col-sm-4">
+                        <input autofocus="autofocus" autocomplete="email" class="form-control" type="email" value="" name="user_email" id="user_email">
+                    </div>
+                </div>
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_first_name">Имя</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="user_first_name" id="user_first_name">
+                    </div>
+                </div>
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_last_name">Фамилия</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" name="user_last_name" id="user_last_name">
+                    </div>
+                </div>
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_birthday">Дата Рождения</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" name="user_birthday" id="user_birthday"></div>
+                    </div>
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_phone">Телефон</label>
+                    <div class="col-sm-4">
+                        <input type="phone" class="form-control" name="user_phone" id="user_phone" placeholder="+79999999">
+                    </div>
+                </div>
+                <div class="form-group row field">
+                    <div class="col-sm-3 col-form-label">
+                        <label class="" for="user_password">Пароль</label>
+                        <div>
+                            <em>(минимум 6 знаков)</em>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <input autocomplete="new-password" class="form-control" type="password" name="user[password]" id="user_password">
+                    </div>
+                </div>
+                <div class="form-group row field">
+                    <label class="col-sm-3 col-form-label" for="user_password_confirmation">Подтверждение пароля</label>
+                    <div class="col-sm-4">
+                        <input autocomplete="new-password" class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-sm-7">
+                        <div class="actions">
+                            <button type="button" class="btn btn-sm btn-primary" onclick="newUser()">Регистрация</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

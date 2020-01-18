@@ -30,6 +30,8 @@ public interface UserService {
 
     Page<UserDTO> getAllManagedUsers(Pageable pageable);
 
+    List<UserDTO> getAllUsers();
+
     Optional<User> getUserWithAuthoritiesByLogin(String login);
 
     Optional<User> getUserWithAuthorities(String id);

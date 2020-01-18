@@ -12,6 +12,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static org.reflections.Reflections.log;
+
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -26,28 +28,28 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/registrations")
     public Registration createRegistration(@RequestBody Registration registration) throws URISyntaxException {
         log.debug("REST request to save Registration : {}", registration);
         Registration result = registrationService.save(registration);
         return result;
     }
 
-    @GetMapping("/registration/{id}")
+    @GetMapping("/registrations/{id}")
     public Registration getEvent(@PathVariable String id) {
         log.debug("REST request to get Registration : {}", id);
         Optional<Registration> registration = registrationService.findOne(id);
         return registration.get();
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/registrations")
     public List<Registration> getAllEvent(Pageable pageable) {
         log.debug("REST request to get a page of Registration");
         Page<Registration> page = registrationService.findAll(pageable);
         return page.getContent();
     }
 
-    @DeleteMapping("/registration/{id}")
+    @DeleteMapping("/registrations/{id}")
     public void deleteEvent(@PathVariable String id) {
         log.debug("REST request to delete Event : {}", id);
         registrationService.delete(id);

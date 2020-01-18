@@ -3,7 +3,7 @@ $(function () {
 });
 
 function getAll () {
-    $.get('/api/event').done(function (events) {
+    $.get('/api/events').done(function (events) {
         events.forEach(function (event) {
             var date = new Date(event.date);
             console.debug(date);

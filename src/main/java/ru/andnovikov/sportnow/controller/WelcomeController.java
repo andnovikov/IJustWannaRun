@@ -13,7 +13,13 @@ public class WelcomeController {
 
     @GetMapping("/event-show")
     public String event(){
-        return "event";
+        return "event-edit";
     }
+
+    @GetMapping("/sign_up")
+    public String signUp() { return "sign_up";}
+
+    @GetMapping("/sign_in")
+    public String signIn() { return "sign_in";}
 
 }

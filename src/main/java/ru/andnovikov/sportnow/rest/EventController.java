@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static org.reflections.Reflections.log;
+
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -27,35 +29,35 @@ public class EventController {
         this.eventService = eventsService;
     }
 
-    @PostMapping("/event")
+    @PostMapping("/events")
     public Event createEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to save Event : {}", event);
         Event result = eventService.save(event);
         return result;
     }
 
-    @PutMapping("/event")
+    @PutMapping("/events")
     public Event updateEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to update Event : {}", event);
         Event result = eventService.save(event);
         return result;
     }
 
-    @GetMapping("/event")
+    @GetMapping("/events")
     public List<Event> getAllEvent(Pageable pageable) {
         log.debug("REST request to get a page of Event");
         Page<Event> page = eventService.findAll(pageable);
         return page.getContent();
     }
 
-    @GetMapping("/event/{id}")
+    @GetMapping("/events/{id}")
     public Event getEvent(@PathVariable String id) {
         log.debug("REST request to get Event : {}", id);
         Optional<Event> event = eventService.findOne(id);
         return event.get();
     }
 
-    @DeleteMapping("/event/{id}")
+    @DeleteMapping("/events/{id}")
     public void deleteEvent(@PathVariable String id) {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);
