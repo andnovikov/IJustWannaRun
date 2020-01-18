@@ -11,9 +11,10 @@
 <div class="container">
     <div class="text-right">
         <p class="ml-auto navbar-text actions custom-actions">
-            <a class="text-body" href="/login" sec:authorize="hasRole('ROLE_ANONYMOUS')">ВОЙТИ</a>
+            <a class="text-body" href="/login" sec:authorize="hasRole('ROLE_ANONYMOUS')">Войти</a>
             <a class="text-body" href="/profile" sec:authorize="isAuthenticated()" sec:authentication="name">username@test.ru</a>
-            <a class="btn btn-light action-button" href="/sign_up" role="button" sec:authorize="hasRole('ROLE_ANONYMOUS')">РЕГИСТРАЦИЯ</a>
+            <a class="text-body" href="/logout" sec:authorize="isAuthenticated()">Выйти</a>
+            <a class="btn btn-light action-button" href="/sign_up" role="button" sec:authorize="hasRole('ROLE_ANONYMOUS')">Регистрация</a>
         </p>
     </div>
     <h1>Забеги, велогонки и другие спортивные соревнования в Росии и мире</h1>
