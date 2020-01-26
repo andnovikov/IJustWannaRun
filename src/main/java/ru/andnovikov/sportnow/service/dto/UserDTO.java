@@ -1,13 +1,12 @@
 package ru.andnovikov.sportnow.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.mongodb.core.index.Indexed;
 import ru.andnovikov.sportnow.config.Constants;
 import ru.andnovikov.sportnow.domain.Authority;
 import ru.andnovikov.sportnow.domain.User;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,6 +23,9 @@ public class UserDTO {
     @Size(min = 1, max = 50)
     private String login;
 
+    @Size(min = 60, max = 60)
+    private String password;
+
     @Size(max = 50)
     private String firstName;
 
@@ -33,6 +35,10 @@ public class UserDTO {
     @Email
     @Size(min = 5, max = 254)
     private String email;
+
+    @Size(min = 5, max = 254)
+    @Indexed
+    private String phone;
 
     @Size(max = 256)
     private String imageUrl;
@@ -59,9 +65,11 @@ public class UserDTO {
     public UserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
+        this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.phone = user.getPhone();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -90,6 +98,14 @@ public class UserDTO {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -112,6 +128,14 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getImageUrl() {
@@ -185,6 +209,7 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

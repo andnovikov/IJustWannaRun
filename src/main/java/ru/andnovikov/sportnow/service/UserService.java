@@ -30,6 +30,8 @@ public interface UserService {
 
     Page<UserDTO> getAllManagedUsers(Pageable pageable);
 
+    List<UserDTO> getAllUsers();
+
     Optional<User> getUserWithAuthoritiesByLogin(String login);
 
     Optional<User> getUserWithAuthorities(String id);
@@ -42,7 +44,4 @@ public interface UserService {
     List<String> getAuthorities();
 
     User save(User user);
-
-    //TODO: delete this method
-    Optional<User> getTestUser();
 }

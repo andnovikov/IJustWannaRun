@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.andnovikov.sportnow.domain.Event;
 import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.domain.Registration;
+import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 import ru.andnovikov.sportnow.rest.NoDataFoundException;
 import ru.andnovikov.sportnow.service.EventService;
 import ru.andnovikov.sportnow.service.RegistrationService;
@@ -36,11 +37,12 @@ public class EventRegistrationController {
         if (!event.isPresent()) {
             throw new NoDataFoundException();
         }
-        User user = userService.getTestUser().get();
+        User user = userService.getUserWithAuthorities().get();
         Registration registration = new Registration();
         registration.setEvent(event.get());
         registration.setRegDate(new Date());
         registration.setRegNumber(0);
+        registration.setStatus(RegStatus.NEW);
         model.addAttribute("user", user);
         model.addAttribute("registration", registration);
 
@@ -51,12 +53,13 @@ public class EventRegistrationController {
     @PostMapping(value = "/registration")
     public String addRegistration (@RequestParam String event_id) {
         Optional<Event> event = eventService.findOne(event_id);
-        User user = userService.getTestUser().get();
+        User user = userService.getUserWithAuthorities().get();
 
         Registration registration = new Registration();
         registration.setEvent(event.get());
         registration.setRegDate(new Date());
         registration.setRegNumber(0);
+        registration.setStatus(RegStatus.NEW);
         registrationService.save(registration);
 
         user.addRegistration(registration);

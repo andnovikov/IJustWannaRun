@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Events</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
+    <div class="text-right">
+        <p class="ml-auto navbar-text actions custom-actions">
+            <a class="text-body" href="/login" sec:authorize="hasRole('ROLE_ANONYMOUS')">Войти</a>
+            <a class="text-body" href="/profile" sec:authorize="isAuthenticated()" sec:authentication="name">username@test.ru</a>
+            <a class="text-body" href="/logout" sec:authorize="isAuthenticated()">Выйти</a>
+            <a class="btn btn-light action-button" href="/sign_up" role="button" sec:authorize="hasRole('ROLE_ANONYMOUS')">Регистрация</a>
+        </p>
+    </div>
     <h1>Забеги, велогонки и другие спортивные соревнования в Росии и мире</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">

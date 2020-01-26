@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-12 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-label-group">
+                                    <label for="inputName">Наименование</label>
+                                    <input type="text" class="form-control" id="inputName">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputKind">Тип</label>
+                                    <input type="text" class="form-control" id="inputKind">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputDate">Дата проведения</label>
+                                    <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control" id="inputDate">
+                                </div>
+                                <div class="form-label-group">
+                                    <label >Дата начала регистрации</label>
+                                    <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                                </div>
+                                <div class="form-label-group">
+                                    <label >Дата окончания регистрации</label>
+                                    <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputCountry">Страна</label>
+                                    <input type="text" class="form-control" id="inputCountry">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputCity">Город</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-label-group">
+                                    <label for="inputShortTitle">Краткое описание</label>
+                                    <textarea class="form-control" id="inputShortTitle" rows="4"></textarea>
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputTitle">Подробное описание</label>
+                                    <textarea class="form-control" id="inputTitle" rows="4"></textarea>
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputDstLength">Дистанция</label>
+                                    <input type="number" class="form-control" id="inputDstLength">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputDstLimit">Лимит участников</label>
+                                    <input type="number" class="form-control" id="inputDstLimit">
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputDstCost">Стоимость</label>
+                                    <input type="number" class="form-control" id="inputDstCost">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-primary ">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

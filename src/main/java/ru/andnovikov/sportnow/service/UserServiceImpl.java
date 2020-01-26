@@ -1,24 +1,20 @@
 package ru.andnovikov.sportnow.service;
 
-//TODO: inspect this class for passwordEncoder
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
-// import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.andnovikov.sportnow.config.Constants;
 import ru.andnovikov.sportnow.domain.Authority;
 import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.repository.AuthorityRepository;
 import ru.andnovikov.sportnow.repository.UserRepository;
-/*import ru.andnovikov.sportnow.security.AuthoritiesConstants;
-import ru.andnovikov.sportnow.security.SecurityUtils;*/
 import ru.andnovikov.sportnow.security.AuthoritiesConstants;
-import ru.andnovikov.sportnow.security.RandomUtil;
 import ru.andnovikov.sportnow.security.SecurityUtils;
+import ru.andnovikov.sportnow.security.RandomUtil;
 import ru.andnovikov.sportnow.service.dto.UserDTO;
 
 import java.time.Instant;
@@ -39,13 +35,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    // private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
-    public UserServiceImpl(UserRepository userRepository, /*PasswordEncoder passwordEncoder, */ AuthorityRepository authorityRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
-        // this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
     }
 
@@ -69,8 +65,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOneByResetKey(key)
             .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
             .map(user -> {
-                //user.setPassword(passwordEncoder.encode(newPassword));
-                user.setPassword("123456");
+                user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 userRepository.save(user);
@@ -105,10 +100,8 @@ public class UserServiceImpl implements UserService {
             }
         });
         User newUser = new User();
-        String encryptedPassword = "123456";
         newUser.setLogin(userDTO.getLogin().toLowerCase());
-        // new user gets initially a generated password
-        newUser.setPassword(encryptedPassword);
+        newUser.setPassword(passwordEncoder.encode(password));
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
@@ -145,14 +138,16 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
+        if (userDTO.getPhone() != null) {
+            user.setPhone(userDTO.getPhone().toLowerCase());
+        }
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
-        String encryptedPassword = "123456";
-        user.setPassword(encryptedPassword);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
@@ -244,16 +239,14 @@ public class UserServiceImpl implements UserService {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
-                String currentEncryptedPassword = user.getPassword();
-                /*
+                String currentEncryptedPassword = passwordEncoder.encode(user.getPassword());
                 if (!passwordEncoder.matches(currentClearTextPassword, currentEncryptedPassword)) {
                     throw new InvalidPasswordException();
                 }
-                */
-                String encryptedPassword = "123456";
+                String encryptedPassword = passwordEncoder.encode(newPassword);
                 user.setPassword(encryptedPassword);
                 userRepository.save(user);
-                // log.debug("Changed password for User: {}", user);
+                log.debug("Changed password for User: {}", user);
             });
     }
 
@@ -303,15 +296,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        log.debug("Request to save Uses : {}", user);
-        return userRepository.save(user);
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
-    //TODO: delete this method
     @Override
-    public Optional<User> getTestUser() {
-        return userRepository.findOneByLogin("test");
+    public User save(User user) {
+        log.debug("Request to save User : {}", user);
+        return userRepository.save(user);
     }
 
 }

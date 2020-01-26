@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sport Now</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="form-row">
+        <nav id="sidebar" class="card">
+            <div class="sidebar-header"></div>
+            <ul class="nav flex-column">
+                <h4>Профиль</h4>
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:getRegistrations('NEW');">Мои заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:getRegistrations('PAYED');">Мои регистрации</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile/edit">Редактировать данные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Выход</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="col-md-8 container" id="container"></div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/profile.js}"></script>
+</body>
+</html>
