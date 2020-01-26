@@ -37,7 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @return the persisted entity.
      */
     @Override
-    public Registration newRegistration(String userId, String eventId) {
+    public Registration newRegistration(Long userId, Long eventId) {
         Registration result = new Registration();
         result.setEvent(eventService.findOne(eventId).orElseThrow(NoDataFoundException::new));
         result.setRegDate(new Date());
@@ -76,7 +76,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @return the entity.
      */
     @Override
-    public Optional<Registration> findOne(String id) {
+    public Optional<Registration> findOne(Long id) {
         log.debug("Request to get UserRegistration : {}", id);
         return registrationRepository.findById(id);
     }
@@ -87,7 +87,7 @@ public class RegistrationServiceImpl implements RegistrationService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete UserRegistration : {}", id);
         registrationRepository.deleteById(id);
     }

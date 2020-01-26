@@ -12,7 +12,7 @@ public interface EventService {
 
     Page<Event> findAll(Pageable pageable);
 
-    Optional<Event> findOne(String id);
+    Optional<Event> findOne(Long id);
 
-    void delete(String id);
+    void delete(Long id);
 }

@@ -8,14 +8,14 @@ import java.util.Optional;
 
 public interface RegistrationService {
 
-    Registration newRegistration(String userId, String eventId);
+    Registration newRegistration(Long userId, Long eventId);
 
     Registration save(Registration registration);
 
     Page<Registration> findAll(Pageable pageable);
 
-    Optional<Registration> findOne(String id);
+    Optional<Registration> findOne(Long id);
 
-    void delete(String id);
+    void delete(Long id);
 
 }

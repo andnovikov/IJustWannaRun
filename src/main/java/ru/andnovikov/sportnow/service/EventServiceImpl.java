@@ -56,7 +56,7 @@ public class EventServiceImpl implements EventService {
      * @return the entity.
      */
     @Override
-    public Optional<Event> findOne(String id) {
+    public Optional<Event> findOne(Long id) {
         log.debug("Request to get Event : {}", id);
         return eventRepository.findById(id);
     }
@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
     }
