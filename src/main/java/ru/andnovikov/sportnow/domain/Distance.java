@@ -2,36 +2,42 @@ package ru.andnovikov.sportnow.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("distances")
+@Entity
+@Table(name = "distances")
 public class Distance {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    // event
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
+    private Event event;
     // distance name
     private String name;
     // diastance length in km
     private double length;
     // participants limit
-    private int limit;
+    private int participant_limit;
     // price for registration
     private int cost;
 
-    public Distance (String name, double length, int limit) {
+    public Distance (String name, double length, int participant_limit) {
         this.name = name;
         this.length = length;
-        this.limit = limit;
+        this.participant_limit = participant_limit;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,12 +57,12 @@ public class Distance {
         this.length = length;
     }
 
-    public int getLimit() {
-        return limit;
+    public int getParticipant_limit() {
+        return participant_limit;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setParticipant_limit(int limit) {
+        this.participant_limit = limit;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class Distance {
                 "id=" + getId() +
                 ", name=" + getName() +
                 ", length=" + getLength() +
-                ", limit=" + getLimit() +
+                ", limit=" + getParticipant_limit() +
                 "}";
     }
 }

@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable String userId) {
+    public ResponseEntity<User> getUser(@PathVariable Long userId) {
         log.debug("REST request to get user", userId);
         // TODO check if not exists
         User user = userService.getUserWithAuthorities(userId).get();
@@ -66,22 +66,22 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/registrations")
-    public ResponseEntity<List<Registration>> getUserRegistrations(@PathVariable String userId) throws URISyntaxException {
+    public ResponseEntity<List<Registration>> getUserRegistrations(@PathVariable Long userId) throws URISyntaxException {
         log.debug("REST request to get user registrations : {}", userId);
 
         // TODO check for authority for user/self registration
         User user = userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new);
-        return new ResponseEntity<>(user.getRegistrations(), HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
     
     @PostMapping("/users/{userId}/registrations")
-    public ResponseEntity<Registration> createUserRegistration(@PathVariable String userId, @RequestParam String eventId) throws URISyntaxException {
+    public ResponseEntity<Registration> createUserRegistration(@PathVariable Long userId, @RequestParam Long eventId) throws URISyntaxException {
         log.debug("REST request to save user registration : {}", userId);
 
         // TODO check for authority for user/self registration
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         Registration registration = registrationService.save(registrationService.newRegistration(userId, eventId));
-        user.addRegistration(registration);
+        // user.addRegistration(registration);
         userService.save(user);
         return new ResponseEntity<>(registration, HttpStatus.OK);
     }

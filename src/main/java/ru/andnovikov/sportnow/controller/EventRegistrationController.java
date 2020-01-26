@@ -32,7 +32,7 @@ public class EventRegistrationController {
     }
 
     @GetMapping(value = "/event/{eventId}/reg")
-    public String createRegistration (@PathVariable String eventId, Model model) {
+    public String createRegistration (@PathVariable Long eventId, Model model) {
         Optional<Event> event = eventService.findOne(eventId);
         if (!event.isPresent()) {
             throw new NoDataFoundException();
@@ -51,7 +51,7 @@ public class EventRegistrationController {
 
     //TODO make this through registration api
     @PostMapping(value = "/registration")
-    public String addRegistration (@RequestParam String event_id) {
+    public String addRegistration (@RequestParam Long event_id) {
         Optional<Event> event = eventService.findOne(event_id);
         User user = userService.getUserWithAuthorities().get();
 
@@ -60,9 +60,8 @@ public class EventRegistrationController {
         registration.setRegDate(new Date());
         registration.setRegNumber(0);
         registration.setStatus(RegStatus.NEW);
+        registration.setUser(user);
         registrationService.save(registration);
-
-        user.addRegistration(registration);
         userService.save(user);
         return "redirect:/";
         //TODO: open message with success registration ???

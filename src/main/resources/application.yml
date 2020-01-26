@@ -3,14 +3,18 @@ logging:
     ru.andnovikov.sportnow: DEBUG
 
 spring:
-  data:
-    mongodb:
-      host: ds163825.mlab.com
-      database: heroku_88pd0w9v
-      username: user
-      password: sportnow256
-      #uri: mongodb://ds163825.mlab.com:63825/heroku_88pd0w9v
-      uri: mongodb://user:sportnow256@ds163825.mlab.com:63825/heroku_88pd0w9v?retryWrites=false
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-54-247-96-169.eu-west-1.compute.amazonaws.com:5432/d3l9ec9uideavq
+    database: d3l9ec9uideavq
+    username: geyhgrctnjqggk
+    password: a5b4ccc22e3177b5f6f3ede930dbe1c075b15c50bb51388fdb06287a566f48f5
+
+  jpa:
+    generate-ddl: false
+
+  liquibase:
+    change-log: classpath:liquibase/rootChangeLog.xml
 
 jwt:
   token:

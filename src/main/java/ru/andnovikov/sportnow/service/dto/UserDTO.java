@@ -1,7 +1,6 @@
 package ru.andnovikov.sportnow.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.mongodb.core.index.Indexed;
 import ru.andnovikov.sportnow.config.Constants;
 import ru.andnovikov.sportnow.domain.Authority;
 import ru.andnovikov.sportnow.domain.User;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class UserDTO {
 
-    private String id;
+    private Long id;
 
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -37,7 +36,6 @@ public class UserDTO {
     private String email;
 
     @Size(min = 5, max = 254)
-    @Indexed
     private String phone;
 
     @Size(max = 256)
@@ -82,11 +80,11 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

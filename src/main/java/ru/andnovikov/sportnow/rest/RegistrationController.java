@@ -40,7 +40,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/registrations/{id}")
-    public Registration getRegistration(@PathVariable String id) {
+    public Registration getRegistration(@PathVariable Long id) {
         log.debug("REST request to get Registration : {}", id);
         Optional<Registration> registration = registrationService.findOne(id);
         return registration.get();
@@ -50,14 +50,12 @@ public class RegistrationController {
     public List<Registration> getRegistrations(@RequestParam RegStatus status) {
         log.debug("REST request to get a page of Registration");
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
-        List<Registration> result = user.getRegistrations().stream()
-                .filter(registration -> registration.getStatus() == status)
-                .collect(Collectors.toList());
+        List<Registration> result = registrationService.getAllByUserAndStatus(user, status);
         return result;
     }
 
     @DeleteMapping("/registrations/{id}")
-    public void deleteRegistrations(@PathVariable String id) {
+    public void deleteRegistrations(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
         registrationService.delete(id);
     }

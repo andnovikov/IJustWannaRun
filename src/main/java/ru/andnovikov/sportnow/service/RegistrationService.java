@@ -3,19 +3,24 @@ package ru.andnovikov.sportnow.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.andnovikov.sportnow.domain.Registration;
+import ru.andnovikov.sportnow.domain.User;
+import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RegistrationService {
 
-    Registration newRegistration(String userId, String eventId);
+    Registration newRegistration(Long userId, Long eventId);
 
     Registration save(Registration registration);
 
     Page<Registration> findAll(Pageable pageable);
 
-    Optional<Registration> findOne(String id);
+    Optional<Registration> findOne(Long id);
 
-    void delete(String id);
+    List<Registration> getAllByUserAndStatus (User user, RegStatus status);
+
+    void delete(Long id);
 
 }

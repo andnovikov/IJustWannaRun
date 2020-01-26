@@ -1,52 +1,69 @@
 package ru.andnovikov.sportnow.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ru.andnovikov.sportnow.domain.enumeration.EventKind;
 import ru.andnovikov.sportnow.domain.enumeration.EventStatus;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Document("events")
+@Entity
+@Table(name = "events")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Event {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     // event name
+    @Column(name = "name", nullable = false)
     private String name;
     // sport type
+    @Column(name = "kind", nullable = false)
     private EventKind kind;
     // event date
+    @Column(name = "date", nullable = false)
     private Date date;
     // when registration starts
-    @Field("reg_start")
+    @Column(name = "reg_start", nullable = false)
     private Date regStart;
     // when registration ends
-    @Field("reg_date")
+    @Column(name = "reg_date", nullable = false)
     private Date regEnd;
     // event status
+    @Column(name = "status", nullable = false)
     private EventStatus status;
     // url to event page
+    @Column(name = "url", nullable = false)
     private String url;
     // country
+    @Column(name = "country", nullable = false)
     private String country;
     // city
+    @Column(name = "city", nullable = false)
     private String city;
     // about
+    @Column(name = "short_title", nullable = false)
     private String shortTitle;
     // about
+    @Column(name = "title", nullable = false)
     private String title;
     // available distances
-    private List<Distance> distances;
 
-    public String getId() {
+    @OneToMany(
+            mappedBy = "event",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Distance> distances = new ArrayList<>();
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

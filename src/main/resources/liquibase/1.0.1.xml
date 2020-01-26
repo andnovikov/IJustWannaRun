@@ -1,0 +1,149 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="andnovikov (generated)" id="1580075347150-1">
+        <createSequence sequenceName="sequence_generator"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-2">
+        <createTable tableName="authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints primaryKey="true" primaryKeyName="authority_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-3">
+        <createTable tableName="distances">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="distances_pkey"/>
+            </column>
+            <column name="cost" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="length" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="participant_limit" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-4">
+        <createTable tableName="events">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="events_pkey"/>
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kind" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reg_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reg_start" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-5">
+        <createTable tableName="registrations">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="registrations_pkey"/>
+            </column>
+            <column name="reg_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="reg_number" type="INTEGER"/>
+            <column name="reg_status" type="INTEGER"/>
+            <column name="event_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-6">
+        <createTable tableName="user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_authority_pkey"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints primaryKey="true" primaryKeyName="user_authority_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-7">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(254)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="lang_key" type="VARCHAR(10)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(254)"/>
+            <column name="reset_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-8">
+        <addUniqueConstraint columnNames="email" constraintName="uk_6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-9">
+        <addUniqueConstraint columnNames="phone" constraintName="uk_du5v5sr43g5bfnji4vb8hg5s3" tableName="users"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-10">
+        <addUniqueConstraint columnNames="login" constraintName="uk_ow0gan20590jrb00upg3va2fn" tableName="users"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-11">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="distances" constraintName="fk5pm7oqieyoyjxnixf041yqk5p" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="events" validate="true"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-12">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="user_authority" constraintName="fk6ktglpl5mjosa283rvken2py5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="name" referencedTableName="authority" validate="true"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-13">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="registrations" constraintName="fk8mi58jt1s8fxmi56jnau0cxqw" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="events" validate="true"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-14">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_authority" constraintName="fkhi46vu7680y1hwvmnnuh4cybx" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="andnovikov (generated)" id="1580075347150-15">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="registrations" constraintName="fkl2iby9n9hp8jwkfj8i96pkxpi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    
+</databaseChangeLog>

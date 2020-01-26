@@ -34,7 +34,7 @@ public interface UserService {
 
     Optional<User> getUserWithAuthoritiesByLogin(String login);
 
-    Optional<User> getUserWithAuthorities(String id);
+    Optional<User> getUserWithAuthorities(Long id);
 
     Optional<User> getUserWithAuthorities();
 

@@ -131,6 +131,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDTO userDTO) {
+        if (userRepository.findOneByLogin(userDTO.getLogin()).isPresent()) {
+            throw new UsernameAlreadyUsedException();
+        }
+
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
@@ -151,6 +155,7 @@ public class UserServiceImpl implements UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
+        user.setCreatedBy("registration");
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO.getAuthorities().stream()
                 .map(authorityRepository::findById)
@@ -261,7 +266,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserWithAuthorities(String id) {
+    public Optional<User> getUserWithAuthorities(Long id) {
         return userRepository.findById(id);
     }
 

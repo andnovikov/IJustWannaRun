@@ -1,32 +1,35 @@
 package ru.andnovikov.sportnow.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 
+import javax.persistence.*;
 import java.util.Date;
 
-@Document(collection = "registrations")
+@Entity
+@Table(name = "registrations")
 public class Registration {
 
     @Id
-    private String id;
-    @DBRef
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
     private Event event;
-    @Field("reg_date")
+    @Column(name = "reg_date")
     private Date regDate;
-    @Field("reg_status")
+    @Column(name = "reg_status")
     private RegStatus status;
-    @Field("reg_number")
+    @Column(name = "reg_number")
     private Integer regNumber;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,5 +63,13 @@ public class Registration {
 
     public void setStatus(RegStatus status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

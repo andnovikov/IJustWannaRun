@@ -51,14 +51,14 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
-    public Event getEvent(@PathVariable String id) {
+    public Event getEvent(@PathVariable Long id) {
         log.debug("REST request to get Event : {}", id);
         Optional<Event> event = eventService.findOne(id);
         return event.get();
     }
 
     @DeleteMapping("/events/{id}")
-    public void deleteEvent(@PathVariable String id) {
+    public void deleteEvent(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);
     }
