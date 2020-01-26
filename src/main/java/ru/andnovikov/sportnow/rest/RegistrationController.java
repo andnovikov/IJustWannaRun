@@ -50,9 +50,7 @@ public class RegistrationController {
     public List<Registration> getRegistrations(@RequestParam RegStatus status) {
         log.debug("REST request to get a page of Registration");
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
-        List<Registration> result = user.getRegistrations().stream()
-                .filter(registration -> registration.getStatus() == status)
-                .collect(Collectors.toList());
+        List<Registration> result = registrationService.getAllByUserAndStatus(user, status);
         return result;
     }
 

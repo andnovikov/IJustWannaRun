@@ -1,5 +1,6 @@
 package ru.andnovikov.sportnow.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ru.andnovikov.sportnow.domain.enumeration.EventKind;
 import ru.andnovikov.sportnow.domain.enumeration.EventStatus;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "events")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Event {
 
     @Id

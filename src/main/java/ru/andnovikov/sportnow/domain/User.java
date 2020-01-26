@@ -96,13 +96,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Registration> registrations;
-
     public Long getId() {
         return id;
     }
@@ -214,31 +207,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public List<Registration> getRegistrations() {
-        return registrations;
-    }
-
-    public void setRegistrations(List<Registration> Registrations) {
-        this.registrations = Registrations;
-    }
-
-    public void addRegistration(Registration registration) {
-        if (registrations == null) {
-            registrations = new ArrayList<>();
-        }
-        this.registrations.add(registration);
-    }
-
-    public Registration findRegistration(Long registrationId) {
-        if ((registrations != null) && (registrations.size() > 0)) {
-            registrations.stream()
-                    .filter(registration -> registration.getId().equals(registrationId))
-                    .collect(Collectors.toList())
-                    .get(0);
-        }
-        return null;
     }
 
     @Override

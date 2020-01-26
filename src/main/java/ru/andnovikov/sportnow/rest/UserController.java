@@ -71,7 +71,7 @@ public class UserController {
 
         // TODO check for authority for user/self registration
         User user = userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new);
-        return new ResponseEntity<>(user.getRegistrations(), HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
     
     @PostMapping("/users/{userId}/registrations")
@@ -81,7 +81,7 @@ public class UserController {
         // TODO check for authority for user/self registration
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         Registration registration = registrationService.save(registrationService.newRegistration(userId, eventId));
-        user.addRegistration(registration);
+        // user.addRegistration(registration);
         userService.save(user);
         return new ResponseEntity<>(registration, HttpStatus.OK);
     }

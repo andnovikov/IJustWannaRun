@@ -60,9 +60,8 @@ public class EventRegistrationController {
         registration.setRegDate(new Date());
         registration.setRegNumber(0);
         registration.setStatus(RegStatus.NEW);
+        registration.setUser(user);
         registrationService.save(registration);
-
-        user.addRegistration(registration);
         userService.save(user);
         return "redirect:/";
         //TODO: open message with success registration ???

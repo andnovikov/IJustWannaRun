@@ -1,5 +1,6 @@
 package ru.andnovikov.sportnow.service;
 
+import liquibase.license.LicenseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.andnovikov.sportnow.domain.Registration;
+import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 import ru.andnovikov.sportnow.repository.RegistrationRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -90,5 +93,11 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void delete(Long id) {
         log.debug("Request to delete UserRegistration : {}", id);
         registrationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Registration> getAllByUserAndStatus (User user, RegStatus status) {
+        log.debug("Request to get UserRegistration : {}", user.getLogin());
+        return registrationRepository.getAllByUserAndStatus(user, status);
     }
 }
