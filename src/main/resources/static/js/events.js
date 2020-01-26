@@ -2,7 +2,8 @@ $(function () {
     getAll();
 });
 
-function getAll () {
+function getAll() {
+    $("#container").empty();
     $.get('/api/events').done(function (events) {
         events.forEach(function (event) {
             var date = new Date(event.date);
@@ -27,7 +28,7 @@ function getAll () {
                             <div class="form-row">
                                 ${event.shortTitle}
                             </div>
-                            <div class="form-row">Москва</div>
+                            <div class="form-row">${event.country}, ${event.city}</div>
                         </div>
                         <div class="form-group col-md-2">
                             <a class="btn btn-outline-danger rounded-0" href="/event/${event.id}/reg" role="button">Регистрация</a>

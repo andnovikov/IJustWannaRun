@@ -1,7 +1,5 @@
 package ru.andnovikov.sportnow.service;
 
-//TODO: inspect this class for passwordEncoder
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
@@ -14,11 +12,9 @@ import ru.andnovikov.sportnow.domain.Authority;
 import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.repository.AuthorityRepository;
 import ru.andnovikov.sportnow.repository.UserRepository;
-/*import ru.andnovikov.sportnow.security.AuthoritiesConstants;
-import ru.andnovikov.sportnow.security.SecurityUtils;*/
 import ru.andnovikov.sportnow.security.AuthoritiesConstants;
-import ru.andnovikov.sportnow.security.RandomUtil;
 import ru.andnovikov.sportnow.security.SecurityUtils;
+import ru.andnovikov.sportnow.security.RandomUtil;
 import ru.andnovikov.sportnow.service.dto.UserDTO;
 
 import java.time.Instant;
@@ -308,12 +304,6 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         log.debug("Request to save User : {}", user);
         return userRepository.save(user);
-    }
-
-    //TODO: delete this method
-    @Override
-    public Optional<User> getTestUser() {
-        return userRepository.findOneByLogin("test");
     }
 
 }

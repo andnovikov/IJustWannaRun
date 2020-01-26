@@ -65,21 +65,21 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @GetMapping("/users/{userId}/register")
+    @GetMapping("/users/{userId}/registrations")
     public ResponseEntity<List<Registration>> getUserRegistrations(@PathVariable String userId) throws URISyntaxException {
         log.debug("REST request to get user registrations : {}", userId);
 
         // TODO check for authority for user/self registration
-        User user = userService.getTestUser().orElseThrow(NoDataFoundException::new);
+        User user = userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new);
         return new ResponseEntity<>(user.getRegistrations(), HttpStatus.OK);
     }
     
-    @PostMapping("/users/{userId}/register")
+    @PostMapping("/users/{userId}/registrations")
     public ResponseEntity<Registration> createUserRegistration(@PathVariable String userId, @RequestParam String eventId) throws URISyntaxException {
         log.debug("REST request to save user registration : {}", userId);
 
         // TODO check for authority for user/self registration
-        User user = userService.getTestUser().orElseThrow(NoDataFoundException::new);
+        User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         Registration registration = registrationService.save(registrationService.newRegistration(userId, eventId));
         user.addRegistration(registration);
         userService.save(user);

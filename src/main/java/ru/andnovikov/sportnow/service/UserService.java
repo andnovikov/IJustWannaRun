@@ -44,7 +44,4 @@ public interface UserService {
     List<String> getAuthorities();
 
     User save(User user);
-
-    //TODO: delete this method
-    Optional<User> getTestUser();
 }

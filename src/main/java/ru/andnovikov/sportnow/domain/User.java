@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Document(collection = "users")
 public class User extends AbstractAuditingEntity implements Serializable {
@@ -206,6 +207,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
             registrations = new ArrayList<>();
         }
         this.registrations.add(registration);
+    }
+
+    public Registration findRegistration(String registrationId) {
+        if ((registrations != null) && (registrations.size() > 0)) {
+            registrations.stream()
+                    .filter(registration -> registration.getId().equals(registrationId))
+                    .collect(Collectors.toList())
+                    .get(0);
+        }
+        return null;
     }
 
     @Override
