@@ -8,6 +8,7 @@ import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
@@ -15,5 +16,7 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
     public List<Registration> findAllByEvent(Event event);
 
     public List<Registration> getAllByUserAndStatus(User user, RegStatus status);
+
+    public Optional<Registration> findFirstByUserAndEvent(User user, Event event);
 
 }

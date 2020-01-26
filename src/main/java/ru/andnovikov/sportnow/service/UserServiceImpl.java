@@ -131,6 +131,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDTO userDTO) {
+        if (userRepository.findOneByLogin(userDTO.getLogin()).isPresent()) {
+            throw new UsernameAlreadyUsedException();
+        }
+
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
