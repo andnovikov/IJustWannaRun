@@ -33,24 +33,10 @@ function getRegistrations (status) {
 };
 
 function confirmRegistration(registrationId) {
-    let type ="PATCH";
-    let formData = {
-        login: $("#user_email").val(),
-        password: $("#user_password").val(),
-        firstName: $("#user_first_name").val(),
-        lastName: $("#user_last_name").val(),
-        email: $("#user_email").val(),
-        phone: $("#user_phone").val(),
-        activated: true,
-        langKey: "ru"
-    };
-
+    var status = "PAYED";
     $.ajax({
-        url: url,
-        type: type,
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        data: JSON.stringify(formData)
+        url: url + "/" + registrationId + "?status=" + status,
+        type: "PATCH"
     }).done(function () {
         location.replace("/profile");
     });

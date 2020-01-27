@@ -1,9 +1,14 @@
 package ru.andnovikov.sportnow.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.andnovikov.sportnow.domain.Registration;
 import ru.andnovikov.sportnow.domain.User;
@@ -20,7 +25,6 @@ import static org.reflections.Reflections.log;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -32,32 +36,51 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @PostMapping("/registrations")
-    public Registration createRegistration(@RequestBody Registration registration) throws URISyntaxException {
+    @PostMapping("/api/registrations")
+    public ResponseEntity<Registration> createRegistration(@RequestBody Registration registration) throws URISyntaxException {
         log.debug("REST request to save Registration : {}", registration);
-        Registration result = registrationService.save(registration);
-        return result;
+        return new ResponseEntity<>(registrationService.save(registration), HttpStatus.CREATED);
     }
 
-    @GetMapping("/registrations/{id}")
-    public Registration getRegistration(@PathVariable Long id) {
+    @GetMapping("/api/registrations/{id}")
+    public ResponseEntity<Registration> getRegistration(@PathVariable Long id) {
         log.debug("REST request to get Registration : {}", id);
         Optional<Registration> registration = registrationService.findOne(id);
-        return registration.get();
+        return new ResponseEntity<>(registration.get(), HttpStatus.OK);
     }
 
-    @GetMapping("/registrations")
-    public List<Registration> getRegistrations(@RequestParam RegStatus status) {
+    @GetMapping("/api/registrations")
+    public ResponseEntity<List<Registration>> getRegistrations(@RequestParam RegStatus status) {
+        // TODO Need another method to filter by User
         log.debug("REST request to get a page of Registration");
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
-        List<Registration> result = registrationService.getAllByUserAndStatus(user, status);
-        return result;
+        return new ResponseEntity<>(registrationService.getAllByUserAndStatus(user, status), HttpStatus.OK);
     }
 
-    @DeleteMapping("/registrations/{id}")
-    public void deleteRegistrations(@PathVariable Long id) {
-        log.debug("REST request to delete Event : {}", id);
+    @PutMapping("/api/registrations/{id}")
+    public ResponseEntity<Registration> updateRegistration(@PathVariable Long id, @RequestBody Registration registration) {
+        log.debug("REST request to update Registration : {}", id);
+        return new ResponseEntity<>(registrationService.save(registration), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/api/registrations/{id}")
+    public ResponseEntity<Registration> deleteRegistration(@PathVariable Long id) {
+        log.debug("REST request to delete Registration : {}", id);
         registrationService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/api/registrations/{id}")
+    public ResponseEntity<Registration> changeRegistrationStatus(@PathVariable Long id, @RequestParam RegStatus status) {
+        log.debug("REST request to confirm Registration : {}", id);
+        Registration registration = registrationService.findOne(id).orElseThrow(NoDataFoundException::new);
+        if (registration.getUser().getId() == userService.getUserWithAuthorities().get().getId()) {
+            registration.setStatus(status);
+            return new ResponseEntity<>(registrationService.save(registration), HttpStatus.ACCEPTED);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
 }

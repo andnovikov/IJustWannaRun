@@ -21,6 +21,7 @@ public class Registration {
     @Column(name = "reg_date")
     private Date regDate;
     @Column(name = "reg_status")
+    @Enumerated(EnumType.STRING)
     private RegStatus status;
     @Column(name = "reg_number")
     private Integer regNumber;

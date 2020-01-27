@@ -1,6 +1,7 @@
 package ru.andnovikov.sportnow.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

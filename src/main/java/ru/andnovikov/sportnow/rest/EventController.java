@@ -17,7 +17,6 @@ import static org.reflections.Reflections.log;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
 public class EventController {
 
     private static final String ENTITY_NAME = "event";
@@ -29,7 +28,7 @@ public class EventController {
         this.eventService = eventsService;
     }
 
-    @PostMapping("/events")
+    @PostMapping("/api/events")
     public Event createEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to save Event : {}", event);
         Event result = eventService.save(event);
@@ -43,21 +42,21 @@ public class EventController {
         return result;
     }
 
-    @GetMapping("/events")
+    @GetMapping("/api/events")
     public List<Event> getAllEvent(Pageable pageable) {
         log.debug("REST request to get a page of Event");
         Page<Event> page = eventService.findAll(pageable);
         return page.getContent();
     }
 
-    @GetMapping("/events/{id}")
+    @GetMapping("/api/events/{id}")
     public Event getEvent(@PathVariable Long id) {
         log.debug("REST request to get Event : {}", id);
         Optional<Event> event = eventService.findOne(id);
         return event.get();
     }
 
-    @DeleteMapping("/events/{id}")
+    @DeleteMapping("/api/events/{id}")
     public void deleteEvent(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);

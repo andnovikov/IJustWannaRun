@@ -75,7 +75,7 @@
             </column>
             <column name="reg_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="reg_number" type="INTEGER"/>
-            <column name="reg_status" type="INTEGER"/>
+            <column name="reg_status" type="VARCHAR(255)"/>
             <column name="event_id" type="BIGINT"/>
             <column name="user_id" type="BIGINT"/>
         </createTable>

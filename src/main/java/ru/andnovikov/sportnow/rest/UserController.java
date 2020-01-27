@@ -24,7 +24,6 @@ import static org.reflections.Reflections.log;
 
 @Slf4j
 @RestController
-@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -48,7 +47,7 @@ public class UserController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/api/users/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) {
         log.debug("REST request to get user", userId);
         // TODO check if not exists
@@ -57,7 +56,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         log.debug("REST request to save user", user);
         User result = userService.createUser(user);
@@ -65,7 +64,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @GetMapping("/users/{userId}/registrations")
+    @GetMapping("/api/users/{userId}/registrations")
     public ResponseEntity<List<Registration>> getUserRegistrations(@PathVariable Long userId) throws URISyntaxException {
         log.debug("REST request to get user registrations : {}", userId);
 
@@ -74,7 +73,7 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
     
-    @PostMapping("/users/{userId}/registrations")
+    @PostMapping("/api/users/{userId}/registrations")
     public ResponseEntity<Registration> createUserRegistration(@PathVariable Long userId, @RequestParam Long eventId) throws URISyntaxException {
         log.debug("REST request to save user registration : {}", userId);
 
