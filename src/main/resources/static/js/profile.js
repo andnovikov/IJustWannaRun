@@ -1,12 +1,13 @@
-let url = "/api/registrations";
+let urlRegistration = "/api/registrations";
+let urlUser = "/api/user";
 
 $(function () {
-    getRegistrations("NEW");
+    getRegistrations("PAYED");
 });
 
 function getRegistrations (status) {
     $("#container").empty();
-    $.get(url + "?status=" +  status).done(function (registrations) {
+    $.get(urlRegistration + "?status=" +  status).done(function (registrations) {
         registrations.forEach(function (registration) {
             var date = new Date(registration.event.date);
             console.debug(date);
@@ -32,10 +33,77 @@ function getRegistrations (status) {
     })
 };
 
+function getUserData (status) {
+    $("#container").empty();
+    $.get(urlUser).done(function (user) {
+        $("#container").append(`
+            <form id="new_user" action="/" accept-charset="UTF-8" method="post">
+                <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_email">Email</label>
+                            <div class="col-sm-4">
+                                <input autofocus="autofocus" autocomplete="email" class="form-control" type="email" value="${user.email}" name="user_email" id="user_email">
+                            </div>
+                        </div>
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_first_name">Имя</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="user_first_name" id="user_first_name" value="${user.firstName}">
+                            </div>
+                        </div>
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_last_name">Фамилия</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="user_last_name" id="user_last_name" value="${user.lastName}">
+                            </div>
+                        </div>
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_birthday">Дата Рождения</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="date" name="user_birthday" id="user_birthday" value=""></div>
+                            </div>
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_phone">Телефон</label>
+                            <div class="col-sm-4">
+                                <input type="phone" class="form-control" name="user_phone" id="user_phone" placeholder="+79999999" value="${user.phone}">
+                            </div>
+                        </div>
+                        <div class="form-group row field">
+                            <div class="col-sm-3 col-form-label">
+                                <label class="" for="user_password">Пароль</label>
+                                <div>
+                                    <em>(минимум 6 знаков)</em>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <input autocomplete="new-password" class="form-control" type="password" name="user[password]" id="user_password">
+                            </div>
+                        </div>
+                        <div class="form-group row field">
+                            <label class="col-sm-3 col-form-label" for="user_password_confirmation">Подтверждение пароля</label>
+                            <div class="col-sm-4">
+                                <input autocomplete="new-password" class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-sm-7">
+                                <div class="actions">
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="updateUserProfile()">Регистрация</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>  
+        `)
+    });
+};
+
 function confirmRegistration(registrationId) {
     var status = "PAYED";
     $.ajax({
-        url: url + "/" + registrationId + "?status=" + status,
+        url: urlRegistration + "/" + registrationId + "?status=" + status,
         type: "PATCH"
     }).done(function () {
         location.replace("/profile");
@@ -45,10 +113,14 @@ function confirmRegistration(registrationId) {
 function deleteRegistration(registrationId) {
     if (confirm('Вы уверены, что хотите удалить?')) {
         $.ajax({
-            url: url + "/" + registrationId,
+            url: urlRegistration + "/" + registrationId,
             type: "DELETE"
         }).done(function () {
             location.reload();
         });
     };
 };
+
+function updateUserProfile() {
+    getRegistrations("PAYED");
+}

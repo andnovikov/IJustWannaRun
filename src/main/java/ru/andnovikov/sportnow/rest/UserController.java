@@ -85,4 +85,10 @@ public class UserController {
         return new ResponseEntity<>(registration, HttpStatus.OK);
     }
 
+    @GetMapping("/api/user")
+    public ResponseEntity<UserDTO> getCurrentUser() {
+        log.debug("REST request to get current user");
+        return new ResponseEntity<>(new UserDTO(userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new)), HttpStatus.OK);
+    }
+
 }
