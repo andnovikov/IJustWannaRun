@@ -1,12 +1,12 @@
 package ru.andnovikov.sportnow.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.andnovikov.sportnow.config.Constants;
 import ru.andnovikov.sportnow.domain.Authority;
 import ru.andnovikov.sportnow.domain.User;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +30,8 @@ public class UserDTO {
 
     @Size(max = 50)
     private String lastName;
+
+    private Date birthday;
 
     @Email
     @Size(min = 5, max = 254)
@@ -66,6 +68,7 @@ public class UserDTO {
         // this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+        this.birthday = user.getBirthday();
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.activated = user.getActivated();
@@ -118,6 +121,14 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getEmail() {

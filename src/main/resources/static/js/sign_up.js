@@ -10,6 +10,7 @@ function newUser() {
         password: $("#user_password").val(),
         firstName: $("#user_first_name").val(),
         lastName: $("#user_last_name").val(),
+        birthday: $("#user_birthday").val(),
         email: $("#user_email").val(),
         phone: $("#user_phone").val(),
         activated: true,

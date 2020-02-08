@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(password));
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
+        newUser.setBirthday(userDTO.getBirthday());
         if (userDTO.getEmail() != null) {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -134,11 +135,11 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findOneByLogin(userDTO.getLogin()).isPresent()) {
             throw new UsernameAlreadyUsedException();
         }
-
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
+        user.setBirthday(userDTO.getBirthday());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -156,14 +157,9 @@ public class UserServiceImpl implements UserService {
         user.setResetDate(Instant.now());
         user.setActivated(true);
         user.setCreatedBy("registration");
-        if (userDTO.getAuthorities() != null) {
-            Set<Authority> authorities = userDTO.getAuthorities().stream()
-                .map(authorityRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
-            user.setAuthorities(authorities);
-        }
+        Set<Authority> authorities = new HashSet<>();
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        user.setAuthorities(authorities);
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -211,12 +207,15 @@ public class UserServiceImpl implements UserService {
                 user.setLogin(userDTO.getLogin().toLowerCase());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
-                if (userDTO.getEmail() != null) {
-                    user.setEmail(userDTO.getEmail().toLowerCase());
-                }
+                user.setBirthday(userDTO.getBirthday());
+                user.setEmail(userDTO.getEmail().toLowerCase());
+                user.setPhone(userDTO.getPhone().toLowerCase());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+
+                /*
+                TODO when update uauthorities?
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
@@ -224,6 +223,8 @@ public class UserServiceImpl implements UserService {
                     .filter(Optional::isPresent)
                     .map(Optional::get)
                     .forEach(managedAuthorities::add);
+
+                 */
                 userRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;
