@@ -1,7 +1,11 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="autoIncrement" value="false" dbms="postgresql,mssql,oracle"/>
+    <property name="autoIncrement" value="true" dbms="h2"/>
+
     <changeSet author="andnovikov (generated)" id="1580075347150-1">
-        <createSequence sequenceName="sequence_generator"/>
+        <createSequence sequenceName="sequence_generator" incrementBy="1" startValue="1000"/>
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-2">
         <createTable tableName="authority">
@@ -12,7 +16,8 @@
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-3">
         <createTable tableName="distances">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT"
+                    defaultValueSequenceNext="sequence_generator">
                 <constraints primaryKey="true" primaryKeyName="distances_pkey"/>
             </column>
             <column name="cost" type="INTEGER">
@@ -30,7 +35,8 @@
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-4">
         <createTable tableName="events">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT"
+                    defaultValueSequenceNext="sequence_generator">>
                 <constraints primaryKey="true" primaryKeyName="events_pkey"/>
             </column>
             <column name="city" type="VARCHAR(255)">
@@ -48,10 +54,10 @@
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="reg_date" type="TIMESTAMP WITHOUT TIME ZONE">
+            <column name="reg_start" type="TIMESTAMP WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
-            <column name="reg_start" type="TIMESTAMP WITHOUT TIME ZONE">
+            <column name="reg_end" type="TIMESTAMP WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
             <column name="short_title" type="VARCHAR(255)">
@@ -63,14 +69,15 @@
             <column name="title" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="url" type="VARCHAR(255)">
+            <column name="url" type="VARCHAR(255)" defaultValue="">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-5">
         <createTable tableName="registrations">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT"
+                    defaultValueSequenceNext="sequence_generator">>
                 <constraints primaryKey="true" primaryKeyName="registrations_pkey"/>
             </column>
             <column name="reg_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
@@ -82,7 +89,8 @@
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-6">
         <createTable tableName="user_authority">
-            <column name="user_id" type="BIGINT">
+            <column name="user_id" type="BIGINT"
+                    defaultValueSequenceNext="sequence_generator">>
                 <constraints primaryKey="true" primaryKeyName="user_authority_pkey"/>
             </column>
             <column name="authority_name" type="VARCHAR(50)">
@@ -92,7 +100,8 @@
     </changeSet>
     <changeSet author="andnovikov (generated)" id="1580075347150-7">
         <createTable tableName="users">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT"
+                    defaultValueSequenceNext="sequence_generator">>
                 <constraints primaryKey="true" primaryKeyName="users_pkey"/>
             </column>
             <column name="created_by" type="VARCHAR(50)">
@@ -105,18 +114,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="activation_key" type="VARCHAR(20)"/>
-            <column name="email" type="VARCHAR(254)"/>
             <column name="first_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="birthday" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="phone" type="VARCHAR(254)"/>
+            <column name="email" type="VARCHAR(254)"/>
             <column name="image_url" type="VARCHAR(256)"/>
             <column name="lang_key" type="VARCHAR(10)"/>
-            <column name="last_name" type="VARCHAR(50)"/>
             <column name="login" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="password_hash" type="VARCHAR(60)">
                 <constraints nullable="false"/>
             </column>
-            <column name="phone" type="VARCHAR(254)"/>
             <column name="reset_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="reset_key" type="VARCHAR(20)"/>
         </createTable>

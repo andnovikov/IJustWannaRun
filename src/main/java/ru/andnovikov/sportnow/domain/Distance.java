@@ -12,7 +12,8 @@ import javax.persistence.*;
 public class Distance {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
     // event
     @ManyToOne(fetch = FetchType.LAZY)

@@ -28,6 +28,8 @@ public class EventController {
         this.eventService = eventsService;
     }
 
+    //TODO refactor to ResponseEntity
+
     @PostMapping("/api/events")
     public Event createEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to save Event : {}", event);
@@ -35,7 +37,7 @@ public class EventController {
         return result;
     }
 
-    @PutMapping("/events")
+    @PutMapping("/api/events")
     public Event updateEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to update Event : {}", event);
         Event result = eventService.save(event);
@@ -49,16 +51,16 @@ public class EventController {
         return page.getContent();
     }
 
-    @GetMapping("/api/events/{id}")
-    public Event getEvent(@PathVariable Long id) {
-        log.debug("REST request to get Event : {}", id);
-        Optional<Event> event = eventService.findOne(id);
+    @GetMapping("/api/events/{eventId}")
+    public Event getEvent(@PathVariable Long eventId) {
+        log.debug("REST request to get Event : {}", eventId);
+        Optional<Event> event = eventService.findOne(eventId);
         return event.get();
     }
 
-    @DeleteMapping("/api/events/{id}")
-    public void deleteEvent(@PathVariable Long id) {
-        log.debug("REST request to delete Event : {}", id);
-        eventService.delete(id);
+    @DeleteMapping("/api/events/{eventId}")
+    public void deleteEvent(@PathVariable Long eventId) {
+        log.debug("REST request to delete Event : {}", eventId);
+        eventService.delete(eventId);
     }
 }

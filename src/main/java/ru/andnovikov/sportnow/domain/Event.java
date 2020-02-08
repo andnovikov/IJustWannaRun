@@ -15,7 +15,8 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
     // event name
     @Column(name = "name", nullable = false)
@@ -30,7 +31,7 @@ public class Event {
     @Column(name = "reg_start", nullable = false)
     private Date regStart;
     // when registration ends
-    @Column(name = "reg_date", nullable = false)
+    @Column(name = "reg_end", nullable = false)
     private Date regEnd;
     // event status
     @Column(name = "status", nullable = false)

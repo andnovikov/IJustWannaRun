@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.andnovikov.sportnow.domain.Event;
 import ru.andnovikov.sportnow.domain.Registration;
 import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
@@ -57,6 +58,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Override
     public Registration save(Registration registration) {
         log.debug("Request to save UserRegistration : {}", registration);
+        if (registration.getStatus() == RegStatus.PAYED) {
+            int regNumber = getEventRegistrationNumber(registration.getEvent(), RegStatus.PAYED);
+            registration.setRegNumber(regNumber);
+        }
         return registrationRepository.save(registration);
     }
 
@@ -99,5 +104,14 @@ public class RegistrationServiceImpl implements RegistrationService {
     public List<Registration> getAllByUserAndStatus (User user, RegStatus status) {
         log.debug("Request to get UserRegistration : {}", user.getLogin());
         return registrationRepository.getAllByUserAndStatus(user, status);
+    }
+
+    private int getEventRegistrationNumber(Event event, RegStatus status) {
+        Optional<Registration> registration = registrationRepository.findFirstByEventAndStatusOrderByRegNumberDesc(event, status);
+        if (!registration.isPresent()) {
+            return 1;
+        } else {
+            return registration.get().getRegNumber()+1;
+        }
     }
 }

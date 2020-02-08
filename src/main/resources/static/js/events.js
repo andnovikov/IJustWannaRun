@@ -7,18 +7,17 @@ function getAll() {
     $.get('/api/events').done(function (events) {
         events.forEach(function (event) {
             var date = new Date(event.date);
-            console.debug(date);
             var dateNumber = date.getDate();
-            console.debug(dateNumber);
+            // TODO change to month name
             var dateYear = date.getFullYear();
+            var dateMonth = date.getMonth();
             $("#container").append(`
                     <div class="form-row">
                         <div class="form-group col-md-1">
                             <h1>${dateNumber}</h1>
-                            <h5>апреля</h5>
+                            <h5>${dateMonth}</h5>
                             <h5>${dateYear}</h5>
                             <h5>БЕГ</h5>
-                            ${event.date}
                         </div>
                         <div class="form-group col-md-1"></div>
                         <div class="form-group col-md-8">

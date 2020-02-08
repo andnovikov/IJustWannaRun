@@ -10,6 +10,9 @@
 <body>
 <div class="container">
     <div class="text-right">
+        <sec:authorize url="/swagger-ui.html">
+            <a th:href="@{/swagger-ui.html#}" href="">Swagger UI</a>
+        </sec:authorize>
         <p class="ml-auto navbar-text actions custom-actions">
             <a class="text-body" href="/login" sec:authorize="hasRole('ROLE_ANONYMOUS')">Войти</a>
             <a class="text-body" href="/profile" sec:authorize="isAuthenticated()" sec:authentication="name">username@test.ru</a>

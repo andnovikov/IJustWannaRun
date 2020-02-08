@@ -74,7 +74,12 @@ public class RegistrationController {
     public ResponseEntity<Registration> changeRegistrationStatus(@PathVariable Long id, @RequestParam RegStatus status) {
         log.debug("REST request to confirm Registration : {}", id);
         Registration registration = registrationService.findOne(id).orElseThrow(NoDataFoundException::new);
-        if (registration.getUser().getId() == userService.getUserWithAuthorities().get().getId()) {
+
+        Long registrationUserId = registration.getUser().getId();
+        Long currentUserId = userService.getUserWithAuthorities().get().getId();
+        log.debug("changeRegistrationStatus found Registration for userId : {}", registrationUserId);
+        log.debug("changeRegistrationStatus current userId : {}", currentUserId);
+        if (registrationUserId.equals(currentUserId)) {
             registration.setStatus(status);
             return new ResponseEntity<>(registrationService.save(registration), HttpStatus.ACCEPTED);
         }

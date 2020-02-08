@@ -1,7 +1,9 @@
 package ru.andnovikov.sportnow.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.andnovikov.sportnow.security.SecurityUtils;
 
 @Controller
@@ -12,9 +14,10 @@ public class PageController {
         return "events";
     }
 
-    @GetMapping("/event-show")
-    public String event(){
-        return "event-edit";
+    @GetMapping("/event/{eventId}")
+    public String event(Model model, @PathVariable Long eventId){
+        model.addAttribute("event_id", eventId);
+        return "event";
     }
 
     @GetMapping("/sign_up")

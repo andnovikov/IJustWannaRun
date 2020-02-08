@@ -50,16 +50,21 @@ public class UserController {
     @GetMapping("/api/users/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) {
         log.debug("REST request to get user", userId);
-        // TODO check if not exists
-        User user = userService.getUserWithAuthorities(userId).get();
-        // TODO response user without password? maybe UserDTO
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new), HttpStatus.OK);
     }
 
     @PostMapping("/api/users")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         log.debug("REST request to save user", user);
         User result = userService.createUser(user);
+        // TODO response user without password
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/api/users/{userId}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody UserDTO user) {
+        log.debug("REST request to update user", user);
+        UserDTO result = userService.updateUser(user).orElse(null);
         // TODO response user without password
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
@@ -72,7 +77,7 @@ public class UserController {
         User user = userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
-    
+
     @PostMapping("/api/users/{userId}/registrations")
     public ResponseEntity<Registration> createUserRegistration(@PathVariable Long userId, @RequestParam Long eventId) throws URISyntaxException {
         log.debug("REST request to save user registration : {}", userId);
