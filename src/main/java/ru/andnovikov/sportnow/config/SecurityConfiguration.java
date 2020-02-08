@@ -23,8 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/swagger-ui.html")
-                .antMatchers("/webjars/springfox-swagger-ui/**")
+        web.ignoring().antMatchers("/webjars/springfox-swagger-ui/**")
                 .antMatchers("/swagger-resources/**")
                 .antMatchers("/v2/api-docs")
                 .antMatchers("/h2-console/**");
@@ -35,7 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 //.and()
-                .authorizeRequests().antMatchers("/**").permitAll()
+                //.authorizeRequests().antMatchers("/**").permitAll()
+                //.and()
+                .authorizeRequests().antMatchers("/swagger-ui.html").hasAuthority("ROLE_ADMIN")
                 .and()
                 .formLogin()
                 .and()
