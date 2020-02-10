@@ -9,6 +9,7 @@ import ru.andnovikov.sportnow.domain.User;
 import ru.andnovikov.sportnow.domain.Registration;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 import ru.andnovikov.sportnow.rest.NoDataFoundException;
+import ru.andnovikov.sportnow.security.SecurityUtils;
 import ru.andnovikov.sportnow.service.EventService;
 import ru.andnovikov.sportnow.service.RegistrationService;
 import ru.andnovikov.sportnow.service.UserService;
@@ -32,11 +33,15 @@ public class EventRegistrationController {
 
     @GetMapping(value = "/event/{eventId}/reg")
     public String createRegistration (@PathVariable Long eventId, Model model) {
+        if (!SecurityUtils.isAuthenticated()) {
+            return "sign_in";
+        }
+
         Optional<Event> event = eventService.findOne(eventId);
         if (!event.isPresent()) {
             throw new NoDataFoundException();
         }
-        User user = userService.getUserWithAuthorities().get();
+        User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         Registration registration = new Registration();
         registration.setEvent(event.get());
         registration.setRegDate(new Date());

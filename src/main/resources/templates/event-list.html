@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <button type="button" class="btn btn-primary" onclick="">Добавить</button>
+    <div class="col-md-12 container" id="container"></div>
+</div>
+<script type="text/javascript" th:src="@{/js/event-list.js}"></script>
+
+<!-- Modal -->
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-label-group">
+                                <label for="inputName">Наименование</label>
+                                <input type="text" class="form-control" id="inputName">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputKind">Тип</label>
+                                <input type="text" class="form-control" id="inputKind">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputDate">Дата проведения</label>
+                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control" id="inputDate">
+                            </div>
+                            <div class="form-label-group">
+                                <label >Дата начала регистрации</label>
+                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                            </div>
+                            <div class="form-label-group">
+                                <label >Дата окончания регистрации</label>
+                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputCountry">Страна</label>
+                                <input type="text" class="form-control" id="inputCountry">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputCity">Город</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-label-group">
+                                <label for="inputDstLength">Дистанция</label>
+                                <input type="number" class="form-control" id="inputDstLength">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputDstLimit">Лимит участников</label>
+                                <input type="number" class="form-control" id="inputDstLimit">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputDstCost">Стоимость</label>
+                                <input type="number" class="form-control" id="inputDstCost">
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputShortTitle">Краткое описание</label>
+                                <textarea class="form-control" id="inputShortTitle" rows="4"></textarea>
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputTitle">Подробное описание</label>
+                                <textarea class="form-control" id="inputTitle" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary ">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="saveEvent()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

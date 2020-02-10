@@ -57,7 +57,8 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         log.debug("REST request to save user", user);
         User result = userService.createUser(user);
-        // TODO response user without password
+        result.setPassword(null);
+        user = new UserDTO(result);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -65,8 +66,8 @@ public class UserController {
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long userId, @RequestBody UserDTO user) {
         log.debug("REST request to update user", user);
         UserDTO result = userService.updateUser(user).orElse(null);
-        // TODO response user without password
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        result.setPassword(null);
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/api/users/{userId}/registrations")

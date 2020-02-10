@@ -36,4 +36,9 @@ public class PageController {
         }
     }
 
+    @GetMapping("/event-list")
+    public String eventList() {
+        return "event-list";
+    }
+
 }
