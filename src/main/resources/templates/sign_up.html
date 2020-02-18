@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="container">
+    <header th:insert="header.html :: header"> </header>
     <h2>Регистрация</h2>
     <form id="new_user" action="/" accept-charset="UTF-8" method="post">
         <div class="row">
@@ -36,8 +37,9 @@
                 <div class="form-group row field">
                     <label class="col-sm-3 col-form-label" for="user_birthday">Дата Рождения</label>
                     <div class="col-sm-2">
-                        <input class="form-control" type="date" name="user_birthday" id="user_birthday"></div>
+                        <input class="form-control" type="date" name="user_birthday" id="user_birthday">
                     </div>
+                </div>
                 <div class="form-group row field">
                     <label class="col-sm-3 col-form-label" for="user_phone">Телефон</label>
                     <div class="col-sm-4">

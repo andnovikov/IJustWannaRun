@@ -1,7 +1,7 @@
 const urlEvents = "/api/events";
 
 $(function () {
-    var eventId = 1000;
+    var eventId = $("#event_id").val();
     getEvent(eventId);
 });
 

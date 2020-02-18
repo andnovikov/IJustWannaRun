@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-    <button type="button" class="btn btn-primary" onclick="">Добавить</button>
+    <header th:insert="header.html :: header"> </header>
+    <button type="button" class="btn btn-primary" onclick="newEvent()">Добавить</button>
     <div class="col-md-12 container" id="container"></div>
 </div>
 <script type="text/javascript" th:src="@{/js/event-list.js}"></script>
 
 <!-- Modal -->
 <div id="myModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title">Modal title</h5>
@@ -28,25 +29,32 @@
                 <form action="#" method="post">
                     <div class="row">
                         <div class="col-lg-4">
+                            <input type="text" class="form-control" id="inputId" hidden>
                             <div class="form-label-group">
                                 <label for="inputName">Наименование</label>
                                 <input type="text" class="form-control" id="inputName">
                             </div>
                             <div class="form-label-group">
                                 <label for="inputKind">Тип</label>
-                                <input type="text" class="form-control" id="inputKind">
+                                <select id="inputKind" class="form-control">
+                                    <option value="RUNNING">Бег</option>
+                                    <option value="SWIMMING">Плавание</option>
+                                    <option value="TRIATHLON">Триатлон</option>
+                                    <option value="BIKE">Вело</option>
+                                    <option value="SKIING">Лыжи</option>
+                                </select>
                             </div>
                             <div class="form-label-group">
                                 <label for="inputDate">Дата проведения</label>
-                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control" id="inputDate">
+                                <input class="form-control" type="date" name="bday" id="inputDate">
                             </div>
                             <div class="form-label-group">
                                 <label >Дата начала регистрации</label>
-                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                                <input type="date" name="bday" class="form-control" id="inputRegStart">
                             </div>
                             <div class="form-label-group">
                                 <label >Дата окончания регистрации</label>
-                                <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                                <input type="date" name="bday" class="form-control" id="inputRegEnd">
                             </div>
                             <div class="form-label-group">
                                 <label for="inputCountry">Страна</label>
@@ -80,8 +88,6 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <button type="submit" class="btn btn-primary ">Сохранить</button>
                 </form>
             </div>
             <div class="modal-footer">

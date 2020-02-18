@@ -36,7 +36,7 @@ public class EventController {
         return new ResponseEntity(eventService.save(event), HttpStatus.CREATED);
     }
 
-    @PutMapping("/api/events")
+    @PutMapping("/api/events/{eventId}")
     public ResponseEntity<Event> updateEvent(@RequestBody Event event) throws URISyntaxException {
         log.debug("REST request to update Event : {}", event);
         return new ResponseEntity(eventService.save(event), HttpStatus.ACCEPTED);
