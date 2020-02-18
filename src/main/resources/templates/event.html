@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="container">
+    <header th:insert="header.html :: header"> </header>
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-12 mx-auto">
             <div class="card card-signin my-5">
+                <input type="number" class="form-control" id="event_id" th:value="${event_id}" hidden>
                 <div class="card-body">
-                    <form action="#" method="post" id="container">
-
-                    </form>
+                    <form action="#" method="post" id="container"></form>
                 </div>
             </div>
         </div>

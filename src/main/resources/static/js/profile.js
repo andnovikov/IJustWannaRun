@@ -38,7 +38,6 @@ function getOrders () {
     $.get(urlRegistration + "?status=" +  status).done(function (registrations) {
         registrations.forEach(function (registration) {
             var date = new Date(registration.event.date);
-            console.debug(date);
             $("#container").append(`
                     <div class="form-row">
                         <div class="form-group col-md-2">${date.toLocaleDateString()}</div>

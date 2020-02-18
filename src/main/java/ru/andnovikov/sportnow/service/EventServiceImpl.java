@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.andnovikov.sportnow.domain.Event;
+import ru.andnovikov.sportnow.domain.enumeration.EventStatus;
 import ru.andnovikov.sportnow.repository.EventRepository;
 
 import java.util.Optional;
@@ -33,6 +34,15 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event save(Event event) {
         log.debug("Request to save Event : {}", event);
+
+        // initialization
+        if (event.getStatus() == null) {
+            event.setStatus(EventStatus.OPEN);
+        }
+        if (event.getUrl() == null) {
+            event.setUrl("");
+        }
+
         return eventRepository.save(event);
     }
 

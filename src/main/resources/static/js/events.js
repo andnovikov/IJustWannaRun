@@ -1,16 +1,34 @@
+const urlEvents = "/api/events";
+
+function monthName(month) {
+    var arr=[
+        'Января',
+        'Февраля',
+        'Марта',
+        'Апреля',
+        'Мая',
+        'Июня',
+        'Июля',
+        'Августа',
+        'Сентября',
+        'Ноября',
+        'Декабря',
+    ];
+    return arr[month+1];
+}
+
 $(function () {
     getAll();
 });
 
 function getAll() {
     $("#container").empty();
-    $.get('/api/events').done(function (events) {
+    $.get(urlEvents).done(function (events) {
         events.forEach(function (event) {
             var date = new Date(event.date);
             var dateNumber = date.getDate();
-            // TODO change to month name
             var dateYear = date.getFullYear();
-            var dateMonth = date.getMonth();
+            var dateMonth = monthName(date.getMonth());
             $("#container").append(`
                     <div class="form-row">
                         <div class="form-group col-md-1">

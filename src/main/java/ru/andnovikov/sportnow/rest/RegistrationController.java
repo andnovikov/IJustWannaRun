@@ -39,6 +39,7 @@ public class RegistrationController {
     @PostMapping("/api/registrations")
     public ResponseEntity<Registration> createRegistration(@RequestBody Registration registration) throws URISyntaxException {
         log.debug("REST request to save Registration : {}", registration);
+        User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         return new ResponseEntity<>(registrationService.save(registration), HttpStatus.CREATED);
     }
 
