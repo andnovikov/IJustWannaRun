@@ -115,8 +115,8 @@ function getUserData (status) {
 function confirmRegistration(registrationId) {
     var status = "PAYED";
     $.ajax({
-        url: urlRegistration + "/" + registrationId + "?status=" + status,
-        type: "PATCH"
+        url: urlRegistration + "/confirm/" + registrationId + "?status=" + status,
+        type: "POST"
     }).done(function () {
         location.replace("/profile");
     });

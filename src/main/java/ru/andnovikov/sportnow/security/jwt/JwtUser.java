@@ -2,10 +2,11 @@ package ru.andnovikov.sportnow.security.jwt;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.andnovikov.sportnow.domain.Authority;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 public class JwtUser implements UserDetails {
 
@@ -24,7 +25,8 @@ public class JwtUser implements UserDetails {
             String firstName,
             String lastName,
             String email,
-            String password, Collection<? extends GrantedAuthority> authorities,
+            String password,
+            Set<Authority> authorities,
             boolean enabled
     ) {
         this.id = id;
@@ -33,8 +35,11 @@ public class JwtUser implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
         this.enabled = enabled;
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        for (Authority auth : authorities) grantedAuthorities.add(new SimpleGrantedAuthority(auth.getName()));
+        this.authorities = grantedAuthorities;
     }
 
     @JsonIgnore

@@ -34,7 +34,7 @@ public class EventRegistrationController {
     @GetMapping(value = "/event/{eventId}/reg")
     public String createRegistration (@PathVariable Long eventId, Model model) {
         if (!SecurityUtils.isAuthenticated()) {
-            return "sign_in";
+            return "redirect:/login";
         }
 
         Optional<Event> event = eventService.findOne(eventId);

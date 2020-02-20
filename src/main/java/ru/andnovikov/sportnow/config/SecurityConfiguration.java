@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.andnovikov.sportnow.security.AuthoritiesConstants;
+import ru.andnovikov.sportnow.security.jwt.JwtConfigurer;
+import ru.andnovikov.sportnow.security.jwt.JwtTokenProvider;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -34,10 +37,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.csrf().disable()
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 //.and()
-                .authorizeRequests().antMatchers("/**").permitAll()
-                .and()
-                //.authorizeRequests().antMatchers("/swagger-ui.html").hasAuthority("ROLE_ADMIN")
+                //.authorizeRequests().antMatchers("/**").permitAll()
                 //.and()
+                .authorizeRequests().antMatchers("/swagger-ui.html").hasAuthority(AuthoritiesConstants.ADMIN)
+                .and()
+                .authorizeRequests().antMatchers("/event-list").hasAuthority(AuthoritiesConstants.ADMIN)
+                .and()
                 .formLogin()
                 .and()
                 .rememberMe()

@@ -71,7 +71,7 @@ public class RegistrationController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/api/registrations/{id}")
+    @PostMapping("/api/registrations/confirm/{id}")
     public ResponseEntity<Registration> changeRegistrationStatus(@PathVariable Long id, @RequestParam RegStatus status) {
         log.debug("REST request to confirm Registration : {}", id);
         Registration registration = registrationService.findOne(id).orElseThrow(NoDataFoundException::new);
