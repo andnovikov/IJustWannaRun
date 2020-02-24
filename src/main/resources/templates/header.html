@@ -3,10 +3,8 @@
         <div class="col-md-6">
             <p class="ml-auto navbar-text actions custom-actions">
                 <a class="text-body" href="/">Main page</a>
-                <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                    <a th:href="@{/swagger-ui.html#}" href="">Swagger UI</a>
-                    <a class="text-body" href="/event-list">События</a>
-                </div>
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{/swagger-ui.html#}" href="">Swagger UI</a>
+                <a sec:authorize="hasAuthority('ROLE_ADMIN')" class="text-body" href="/event-list">События</a>
             </p>
         </div>
         <div class="text-right col-md-6">
@@ -18,4 +16,5 @@
             </p>
         </div>
     </div>
+
 </header>

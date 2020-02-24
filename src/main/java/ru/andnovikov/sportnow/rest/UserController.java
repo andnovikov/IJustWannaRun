@@ -70,27 +70,6 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/api/users/{userId}/registrations")
-    public ResponseEntity<List<Registration>> getUserRegistrations(@PathVariable Long userId) throws URISyntaxException {
-        log.debug("REST request to get user registrations : {}", userId);
-
-        // TODO check for authority for user/self registration
-        User user = userService.getUserWithAuthorities(userId).orElseThrow(NoDataFoundException::new);
-        return new ResponseEntity<>(null, HttpStatus.OK);
-    }
-
-    @PostMapping("/api/users/{userId}/registrations")
-    public ResponseEntity<Registration> createUserRegistration(@PathVariable Long userId, @RequestParam Long eventId) throws URISyntaxException {
-        log.debug("REST request to save user registration : {}", userId);
-
-        // TODO check for authority for user/self registration
-        User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
-        Registration registration = registrationService.save(registrationService.newRegistration(userId, eventId));
-        // user.addRegistration(registration);
-        userService.save(user);
-        return new ResponseEntity<>(registration, HttpStatus.OK);
-    }
-
     @GetMapping("/api/user")
     public ResponseEntity<UserDTO> getCurrentUser() {
         log.debug("REST request to get current user");

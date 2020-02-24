@@ -52,8 +52,7 @@ public class EventRegistrationController {
 
         return "event-reg";
     }
-
-    //TODO make this through registration api
+    
     @PostMapping(value = "/registration")
     public String addRegistration (@RequestParam Long event_id) {
         Optional<Event> event = eventService.findOne(event_id);
@@ -68,7 +67,6 @@ public class EventRegistrationController {
         registrationService.save(registration);
         userService.save(user);
         return "redirect:/";
-        //TODO: open message with success registration ???
     }
 
 }

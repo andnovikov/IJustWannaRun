@@ -3,8 +3,10 @@ let urlUser = "/api/user";
 let urlUsers = "/api/users";
 
 $(function () {
-    getRegistrations("PAYED");
+    $("#alert").hide();
+    getRegistrations();
 });
+
 
 function getRegistrations () {
     $("#container").empty();
@@ -118,7 +120,8 @@ function confirmRegistration(registrationId) {
         url: urlRegistration + "/confirm/" + registrationId + "?status=" + status,
         type: "POST"
     }).done(function () {
-        location.replace("/profile");
+        getRegistrations();
+        showAlert("Заказ успешно подтвержден.");
     });
 };
 
@@ -128,7 +131,8 @@ function deleteRegistration(registrationId) {
             url: urlRegistration + "/" + registrationId,
             type: "DELETE"
         }).done(function () {
-            location.reload();
+            getOrders();
+            showAlert("Заказ успешно удален.");
         });
     };
 };
@@ -154,6 +158,14 @@ function updateUserProfile() {
         dataType: 'json',
         data: JSON.stringify(formData)
     }).done(function () {
-        getRegistrations("PAYED");
+        getRegistrations();
+        showAlert("Профиль успешно обновлен.");
+    });
+}
+
+function showAlert(text) {
+    $("#alert_text").text(text);
+    $("#alert").fadeTo(2000, 500).slideUp(500, function() {
+        $("#alert").slideUp(500);
     });
 }

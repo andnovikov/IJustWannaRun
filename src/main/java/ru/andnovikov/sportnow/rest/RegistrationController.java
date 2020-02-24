@@ -52,7 +52,6 @@ public class RegistrationController {
 
     @GetMapping("/api/registrations")
     public ResponseEntity<List<Registration>> getRegistrations(@RequestParam RegStatus status) {
-        // TODO Need another method to filter by User
         log.debug("REST request to get a page of Registration");
         User user = userService.getUserWithAuthorities().orElseThrow(NoDataFoundException::new);
         return new ResponseEntity<>(registrationService.getAllByUserAndStatus(user, status), HttpStatus.OK);

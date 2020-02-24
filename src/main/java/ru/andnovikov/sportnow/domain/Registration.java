@@ -1,5 +1,6 @@
 package ru.andnovikov.sportnow.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.andnovikov.sportnow.domain.enumeration.RegStatus;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
