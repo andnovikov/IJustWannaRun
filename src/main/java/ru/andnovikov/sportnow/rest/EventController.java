@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import ru.andnovikov.sportnow.domain.Event;
 import ru.andnovikov.sportnow.service.EventService;
-// import ru.andnovikov.ijustwannarun.web.rest.errors.BadRequestAlertException;
 
 import java.net.URISyntaxException;
 import java.util.List;
@@ -56,6 +56,7 @@ public class EventController {
         return new ResponseEntity(event.get(), HttpStatus.OK);
     }
 
+    // @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @DeleteMapping("/api/events/{eventId}")
     public ResponseEntity<Event> deleteEvent(@PathVariable Long eventId) {
         log.debug("REST request to delete Event : {}", eventId);
