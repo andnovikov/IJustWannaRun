@@ -52,24 +52,13 @@ public class Event {
     @Column(name = "title", nullable = false)
     private String title;
     // available distances
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Distance> distances = new ArrayList<>();
 
-    public Event(String name, EventKind kind, Date date, Date regStart, Date regEnd, EventStatus status, String url,
-                 String country, String city, String shortTitle, String title, List<Distance> distances) {
-        this.name = name;
-        this.kind = kind;
-        this.date = date;
-        this.regStart = regStart;
-        this.regEnd = regEnd;
-        this.status = status;
-        this.url = url;
-        this.country = country;
-        this.city = city;
-        this.shortTitle = shortTitle;
-        this.title = title;
-        this.distances = distances;
-    }
+    @OneToMany(
+            mappedBy = "event",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Distance> distances = new ArrayList<>();
 
     public Long getId() {
         return id;
