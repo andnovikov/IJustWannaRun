@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.andnovikov.sportnow.domain.Event;
+import ru.andnovikov.sportnow.domain.enumeration.EventKind;
 import ru.andnovikov.sportnow.domain.enumeration.EventStatus;
 import ru.andnovikov.sportnow.repository.EventRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -80,5 +82,17 @@ public class EventServiceImpl implements EventService {
     public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
+    }
+
+    /**
+     * Get all the event.
+     *
+     * @param eventKind the event kind.
+     * @return the list of entities.
+     */
+    @Override
+    public List<Event> findOpenByKindAndStatus(EventKind eventKind) {
+        log.debug("Request to get findOpenByKindAndStatus");
+        return eventRepository.findAllByKindAndStatus(eventKind, EventStatus.OPEN);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import ru.andnovikov.sportnow.domain.Event;
+import ru.andnovikov.sportnow.domain.enumeration.EventKind;
 import ru.andnovikov.sportnow.service.EventService;
 
 import java.net.URISyntaxException;
@@ -47,6 +48,13 @@ public class EventController {
         log.debug("REST request to get a page of Event");
         Page<Event> page = eventService.findAll(pageable);
         return new ResponseEntity(page.getContent(), HttpStatus.OK);
+    }
+
+    @GetMapping("/api/events/open")
+    public ResponseEntity<List<Event>> getOpenEventByKind(@RequestParam EventKind eventKind) {
+        log.debug("REST request to get a page of Event");
+        List<Event> list = eventService.findOpenByKindAndStatus(eventKind);
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/api/events/{eventId}")

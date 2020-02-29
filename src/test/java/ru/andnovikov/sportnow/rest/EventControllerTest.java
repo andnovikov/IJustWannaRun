@@ -115,5 +115,5 @@ class EventControllerTest {
         mvc.perform(delete(baseUrl + "/" +"{eventId}", FIELD_ID))
                 .andExpect(status().isNoContent());
     }
-    
+
 }
