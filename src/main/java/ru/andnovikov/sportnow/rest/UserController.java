@@ -1,23 +1,15 @@
 package ru.andnovikov.sportnow.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.andnovikov.sportnow.config.Constants;
-import ru.andnovikov.sportnow.domain.Registration;
 import ru.andnovikov.sportnow.domain.User;
-import ru.andnovikov.sportnow.service.RegistrationService;
 import ru.andnovikov.sportnow.service.UserService;
 import ru.andnovikov.sportnow.service.dto.UserDTO;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.reflections.Reflections.log;
@@ -27,12 +19,10 @@ import static org.reflections.Reflections.log;
 public class UserController {
 
     private final UserService userService;
-    private final RegistrationService registrationService;
 
     @Autowired
-    public UserController (UserService userService, RegistrationService registrationService) {
+    public UserController (UserService userService) {
         this.userService = userService;
-        this.registrationService = registrationService;
     }
 
     /**

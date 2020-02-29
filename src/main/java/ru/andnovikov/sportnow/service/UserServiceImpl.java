@@ -99,12 +99,11 @@ public class UserServiceImpl implements UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
-        User newUser = new User();
-        newUser.setLogin(userDTO.getLogin().toLowerCase());
-        newUser.setPassword(passwordEncoder.encode(password));
-        newUser.setFirstName(userDTO.getFirstName());
-        newUser.setLastName(userDTO.getLastName());
-        newUser.setBirthday(userDTO.getBirthday());
+        User newUser = new User(userDTO.getLogin().toLowerCase(),
+                                passwordEncoder.encode(password),
+                                userDTO.getFirstName(),
+                                userDTO.getLastName(),
+                                userDTO.getBirthday());
         if (userDTO.getEmail() != null) {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -135,11 +134,11 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findOneByLogin(userDTO.getLogin()).isPresent()) {
             throw new UsernameAlreadyUsedException();
         }
-        User user = new User();
-        user.setLogin(userDTO.getLogin().toLowerCase());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setBirthday(userDTO.getBirthday());
+        User user = new User(userDTO.getLogin().toLowerCase(),
+                passwordEncoder.encode(userDTO.getPassword()),
+                userDTO.getFirstName(),
+                userDTO.getLastName(),
+                userDTO.getBirthday());
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
@@ -152,7 +151,6 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);

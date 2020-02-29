@@ -83,6 +83,14 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
+    public UserDTO(String login, String password, String firstName, String lastName, Date birthday) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
+
     public Long getId() {
         return id;
     }

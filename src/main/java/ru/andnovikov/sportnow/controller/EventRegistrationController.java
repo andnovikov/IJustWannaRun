@@ -65,7 +65,6 @@ public class EventRegistrationController {
         registration.setStatus(RegStatus.NEW);
         registration.setUser(user);
         registrationService.save(registration);
-        userService.save(user);
         return "redirect:/";
     }
 
