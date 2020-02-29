@@ -56,7 +56,7 @@ public class EventController {
         return new ResponseEntity(event.get(), HttpStatus.OK);
     }
 
-    // @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @DeleteMapping("/api/events/{eventId}")
     public ResponseEntity<Event> deleteEvent(@PathVariable Long eventId) {
         log.debug("REST request to delete Event : {}", eventId);

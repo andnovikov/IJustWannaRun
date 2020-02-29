@@ -102,7 +102,7 @@ class EventControllerTest {
         mvc.perform(get(baseUrl + "/" + "{eventId}", FIELD_ID).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
-/*
+
     @Test
     void deleteEventError() throws Exception {
         mvc.perform(delete(baseUrl + "/" +"{eventId}", FIELD_ID))
@@ -115,5 +115,5 @@ class EventControllerTest {
         mvc.perform(delete(baseUrl + "/" +"{eventId}", FIELD_ID))
                 .andExpect(status().isNoContent());
     }
-*/
+    
 }
