@@ -19,9 +19,8 @@ import static org.reflections.Reflections.log;
  * @author Eugene Suleimanov
  * @version 1.0
  */
-
-@Service
 @Slf4j
+@Service
 public class JwtUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
