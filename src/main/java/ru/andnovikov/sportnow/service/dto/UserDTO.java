@@ -58,6 +58,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private String accessToken;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -219,6 +221,14 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -237,4 +247,5 @@ public class UserDTO {
             ", authorities=" + authorities +
             "}";
     }
+
 }

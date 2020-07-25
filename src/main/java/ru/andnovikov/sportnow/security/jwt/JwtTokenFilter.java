@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends GenericFilterBean {
 
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+
     private JwtTokenProvider jwtTokenProvider;
 
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
